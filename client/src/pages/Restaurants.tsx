@@ -1,0 +1,14 @@
+import { Slideshow } from "../components/Slideshow";
+
+export function Restaurants() {
+
+  const images = [
+    './images/restaurants/slideshow1.png',
+    './images/restaurants/slideshow2.png',
+    './images/restaurants/slideshow3.png',
+  ];
+
+  return (
+    <Slideshow images={images}/>
+  );
+}
