@@ -1,19 +1,38 @@
-import { Carousel } from '@mantine/carousel';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Autoplay, Pagination } from 'swiper/modules';
 import { Image } from '@mantine/core';
+import './styles.css'
 
 export function Slideshow({images} : {images: string[]}) {
 
   const slides = images.map((url) => (
-    <Carousel.Slide key={url}>
-      <Image src={url} fit="cover" style={{ width: '100%', height: '100%' }} />
-    </Carousel.Slide>
+    <SwiperSlide>
+      <Image src={url} />
+    </SwiperSlide>
   ));
 
   return (
-    <div className='w-full flex flex-row justify-center'>
-      <div style={{ position: 'relative', width: '70%', height: '400px' }}> {/* Adjust height as needed */}
-        <Carousel withIndicators>{slides}</Carousel>
-      </div>
+    <div>
+      <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        loop={true}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Autoplay, Pagination]}
+        className="mySwiper"
+      >
+        {slides}
+      </Swiper>
     </div>
   );
 }
