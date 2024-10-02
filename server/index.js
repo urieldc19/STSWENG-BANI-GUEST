@@ -1,15 +1,7 @@
-const express = require("express");
-const connectDB = require("./config/database.js")
-
-const app = express()
-const PORT = 3000
-
-app.get('/', (req, res) => {
-  res.send('Hello')
-})
+const { app, PORT } = require('./src/server')
+const { connectDB } = require('./src/config/database')
 
 app.listen(PORT, () => {
-  connectDB
-  console.log(`Server is currently running on port ${PORT}`)
+    connectDB
+    console.log(`Server is currently running on port ${PORT}`)
 });
-
