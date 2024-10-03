@@ -11,6 +11,7 @@ export default {
         },
         fontFamily:{
           'serif': ['Inria Serif', 'sans-serif'],
+          'JimNightshade': ['"Jim Nightshade"', 'cursive'],
         },
       },
     },
