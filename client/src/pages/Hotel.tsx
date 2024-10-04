@@ -1,4 +1,3 @@
-
 import '../components/styles.css'; 
 import { Slideshow } from '../components/Slideshow'; 
 import { FlipCard } from '../components/flipcard'; 
@@ -59,7 +58,7 @@ export function Hotel() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto my-8 mb-20 justify-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 max-w-6xl mx-auto my-8 mb-20 justify-center">
   <FlipCard
     frontContent={
       <img
@@ -110,7 +109,7 @@ export function Hotel() {
   />
 </div>
 
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto my-8 mb-20 justify-center">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 max-w-6xl mx-auto my-8 mb-20 justify-center">
   <FlipCard
     frontContent={
       <img
