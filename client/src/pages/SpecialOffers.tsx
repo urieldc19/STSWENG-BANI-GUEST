@@ -56,8 +56,8 @@ export function SpecialOffers () {
                 <div className="grid grid-cols-1 gap-6 px-8 md:grid-cols-3">
                 
                 {/* Wedding Package A */}
-                <div className="ml-5 w-100 p-6 text-gray-800 transition-colors duration-200 inner-shadow bg-[#A0B1B5] opacity-75 hover:bg-[#2F515B] hover:text-[#F2EFE8]">
-                    
+                <div className="mt-5 mb-5 ml-5 w-100 p-6 text-gray-800 transition-colors duration-200 inner-shadow bg-[#A0B1B5] opacity-75 hover:bg-[#2F515B] hover:text-[#F2EFE8]">
+                    {/* Adjusted font size for package titles */}
                     <h3 className="mb-4 font-serif text-3xl font-semibold">Wedding Package A</h3>
                     <ul className="mt-4 mb-4 font-serif text-lg font-semibold">
                     <p>Rate: 500,000</p>
@@ -76,8 +76,8 @@ export function SpecialOffers () {
                 </div>
         
                 {/* Wedding Package B */}
-                <div className="mr-25 p-6 text-gray-800 transition-colors duration-200 shadow-md inner-shadow  bg-[#A0B1B5] opacity-75 hover:bg-[#2F515B] hover:text-[#F2EFE8]">
-                    
+                <div className="mr-25 mb-5 mt-5 p-6 text-gray-800 transition-colors duration-200 shadow-md inner-shadow  bg-[#A0B1B5] opacity-75 hover:bg-[#2F515B] hover:text-[#F2EFE8]">
+                    {/* Adjusted font size for package titles */}
                     <h3 className="mb-4 font-serif text-3xl font-semibold">Wedding Package B</h3>
                     <ul className="mt-4 mb-4 font-serif text-xl font-semibold">
                     <p>Rate: 380,000</p>
@@ -100,7 +100,7 @@ export function SpecialOffers () {
                 <div className="flex space-x-10">
                 
                 {/* Wedding Package C */}
-                    <div className="h-auto mr-10 p-6 text-gray-800 transition-colors duration-200 shadow-md inner-shadow bg-[#A0B1B5] opacity-75 hover:bg-[#2F515B] hover:text-[#F2EFE8]">
+                    <div className="h-auto mt-5 mr-10 p-6 text-gray-800 transition-colors duration-200 shadow-md inner-shadow bg-[#A0B1B5] opacity-75 hover:bg-[#2F515B] hover:text-[#F2EFE8]">
                         <h3 className="mb-4 font-serif text-3xl font-semibold">Wedding Package C</h3>
                             <ul className="mt-4 mb-4 font-serif text-lg font-semibold">
                                 <p>Rate: 200,000</p>
@@ -133,7 +133,7 @@ export function SpecialOffers () {
 
                 <div className="flex space-x-10">
                     {/* Wedding Package E */}
-                    <div className="h-auto mr-10 p-6 text-gray-800 transition-colors duration-200 shadow-md inner-shadow bg-[#A0B1B5] opacity-75 hover:bg-[#2F515B] hover:text-[#F2EFE8]">
+                    <div className="h-auto mb-5 mr-10 p-6 text-gray-800 transition-colors duration-200 shadow-md inner-shadow bg-[#A0B1B5] opacity-75 hover:bg-[#2F515B] hover:text-[#F2EFE8]">
                         <h3 className="mb-4 font-serif text-3xl font-semibold">Wedding Package E</h3>
                             <ul className="mt-4 mb-4 font-serif text-lg font-semibold">
                                 <p>Rate: 300,000</p>
@@ -152,7 +152,7 @@ export function SpecialOffers () {
 
     {/* 2nd section */}
     
-    <div className="mt-10 h-5/6 p-6 text-black transition-colors duration-200 shadow-md bg-[#CBA989] opacity-75">
+    <div className="mt-10 h-auto p-6 text-black transition-colors duration-200 shadow-md bg-[#CBA989] opacity-75">
         
         <div className="my-6 text-center">
             <h2 className="mb-5 font-serif text-4xl text-black">Special Offers</h2>
@@ -197,7 +197,7 @@ export function SpecialOffers () {
                                     <li> - 400.00 per head</li>
                                     </ul>
                                     <p className="justify-center mt-3 font-serif text-lg font-semibold">Package B</p>
-                                    <p className="justify-center mt-3 font-serif text-lg font-semibold">Rate:4,250.00 php</p>
+                                    <p className="justify-center mt-3 font-serif text-lg font-semibold">Rate: 4,250.00 php</p>
                                     <ul className="mt-4 mb-1 space-y-2 font-serif text-justify text-md">
                                     <li> - KUBO ONLY</li>
                                     <li> - Only the Couple/Model ARE FREE</li>
@@ -251,6 +251,7 @@ export function SpecialOffers () {
         </div>
     </div>
 
+    <footer/>
     </>
     )
 }
