@@ -33,10 +33,10 @@ export function Hotel() {
       </div>
 
       <section className="max-w-6xl mx-auto my-16 px-5 flex">
-        <div className="flex-1 pr-10 text-left" style={{ marginLeft: '-300px' }}>
+        <div className="flex-1 pr-10 text-left" style={{ marginLeft: '-200px' }}>
           <h2 className="text-[55px] font-bold mb-4">Experience Unmatched <br />Comfort at Our Resort</h2>
         </div>
-        <div className="flex-1 text-left" style={{ marginRight: '-300px' }}>
+        <div className="flex-1 text-left" style={{ marginRight: '-200px' }}>
           <p className="text-[30px]">
             <br /><br /><br /><br /><br />Welcome to a hideaway where comfort meets convenience. Our fully air-conditioned rooms provide the perfect escape, each complete with its own private bathroom to ensure a relaxing and enjoyable stay. Whether you're here for a weekend getaway or a longer vacation, we have everything you need for a comfortable stay.
           </p>
