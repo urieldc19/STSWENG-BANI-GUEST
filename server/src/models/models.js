@@ -47,8 +47,11 @@ const roomSchema = new mongoose.Schema({
     pax: {
         type: Number,
         required: true,
-        min: 1
-    }
+    },
+    price: {
+        type: Double,
+        required: true
+    },
 },  {
     timestamps: true
 });
@@ -96,9 +99,22 @@ const reservationSchema = new mongoose.Schema({
         required: true,
         ref: 'Room' // Reference to Room model
     },
+    totalAmount: {
+        type: Double,
+        required: true
+    },
+    amountPaid: {
+        type: Double,
+        required: true
+    },
+    arrivalStatus: {
+        type: String,
+        enum: ["Booked", "Checked-in", "Checked-out"],
+        required: true
+    },
     otherNotes: {
         type: String
-    }
+    },
 },  {
     timestamps: true
 });
