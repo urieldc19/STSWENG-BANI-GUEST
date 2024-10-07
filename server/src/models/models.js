@@ -39,19 +39,36 @@ const roomSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    floor: {
+        type: Number,
+        enum: [1, 2],
+        required: true,
+    },
     bedType: {
         type: String,
-        enum: ['Single', 'Double', 'Suite'], 
+        enum: ['Queen', 'King'],
         required: true
+    },
+    bedNum: {
+        type: Number,
+        required: true,
     },
     pax: {
         type: Number,
         required: true,
     },
-    price: {
-        type: Double,
-        required: true
+    maxPax: {
+        type: Number,
+        required: true,
     },
+    price: {
+        type: Number,
+        required: true,
+    },
+    additionalPrice: {
+        type: Number,
+        required: true,
+    }
 },  {
     timestamps: true
 });
