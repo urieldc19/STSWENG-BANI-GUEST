@@ -8,7 +8,8 @@ const [adults, setAdults] = useState(1);
 const [children, setChildren] = useState(0);
 const [roomPreference, setRoomPreference] = useState('');
 const [pets, setPets] = useState('no');
-const [name, setName] = useState('');
+const [firstName, setFirstName] = useState('');
+const [lastName, setLastName] = useState('');
 const [email, setEmail] = useState('');
 const [phone, setPhone] = useState('');
 const [address, setAddress] = useState('');
@@ -34,7 +35,8 @@ const toggleModal = () => {
     setChildren(0);
     setRoomPreference('');
     setPets('no');
-    setName('');
+    setFirstName('');
+    setLastName('');
     setEmail('');
     setPhone('');
     setAddress('');
@@ -49,7 +51,7 @@ const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     //validation (need backend)
-    if (!checkIn || !checkOut || !adults || !children || !name || !roomPreference || !email || !phone || !address || !proofOfPayment) {
+    if (!checkIn || !checkOut || !adults || !children || !firstName || !lastName || !roomPreference || !email || !phone || !address || !proofOfPayment) {
     setSubmissionStatus('[System Message] Please fill out all the required fields.');
     return;
     }
@@ -90,7 +92,8 @@ const handleSubmit = (e: React.FormEvent) => {
     setChildren(0);
     setRoomPreference('');
     setPets('no');
-    setName('');
+    setFirstName('');
+    setLastName('');
     setEmail('');
     setPhone('');
     setAddress('');
@@ -212,13 +215,24 @@ return (
                 </div>
             </div>
 
-            <div className="flex flex-col col-span-2">
-            <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Full Name</label>
+            <div className="flex flex-col">
+            <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">First Name</label>
                 <input
                 type="text"
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="p-1 border border-gray-300 rounded"
+                />
+            </div>
+
+            <div className="flex flex-col">
+            <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Last Name</label>
+                <input
+                type="text"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
                 className="p-1 border border-gray-300 rounded"
                 />
             </div>
@@ -313,3 +327,4 @@ return (
 };
 
 export default ReserveNowButton;
+
