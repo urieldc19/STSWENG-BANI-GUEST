@@ -1,38 +1,16 @@
 import ReserveNowButton from "../components/ReserveButton";
-import SeeMoreButton from "../components/SeeMoreButton";
+import SpecialOffersBox from "../components/SpecialOffersBox";
 import { Slideshow } from "../components/Slideshow";
 
 export function SpecialOffers () {
+
     const images = [
         './images/specialoffers/slideshow1.png',
         './images/specialoffers/slideshow2.png',
         './images/specialoffers/slideshow3.png',
         './images/specialoffers/slideshow4.png',
     ];
-
-    const images2 = [
-        './images/specialoffers/slideshow5.png',
-        './images/specialoffers/slideshow6.png',
-    ];
-
-    const images3 = [
-        './images/specialoffers/slideshow7.png',
-        './images/specialoffers/slideshow8.png',
-        './images/specialoffers/slideshow9.png',
-    ];
-
-    const images4 = [
-        './images/specialoffers/slideshow10.png',
-        './images/specialoffers/slideshow11.png',
-        './images/specialoffers/slideshow12.png',
-    ];
-
-    const images5 = [
-        './images/specialoffers/slideshow13.png',
-        './images/specialoffers/slideshow14.png',
-    ];
     
-
     return (
     <>
         
@@ -149,7 +127,6 @@ export function SpecialOffers () {
         </div>
     </div>
 
-
     {/* 2nd section */}
     
     <div className="mt-10 h-auto p-6 text-black transition-colors duration-200 shadow-md bg-[#CBA989] opacity-75">
@@ -164,91 +141,8 @@ export function SpecialOffers () {
 
         <ReserveNowButton></ReserveNowButton>
 
-
-        <div className="flex flex-wrap content-center gap-6 mt-10 ml-10 mr-5">
-                {/* Box 1 */}
-                <div className="bg-[#C68A43] shadow-lg inner-shadow p-4 w-[308px] h-[380px] flex justify-center items-center">
-                        <div className="w-[250px] h-[150px] ml-10 mr-10 mb-20 mt-[-100px]">
-                            <Slideshow images={images2} />
-                                <p className="mt-3 font-serif text-lg font-semibold text-center text-black">Let your fur babies be with YOU</p>
-                                
-                                <SeeMoreButton content={
-                                    <div> 
-                                    <p className="items-center justify-center font-serif text-2xl font-semibold">Let your fur babies be with YOU!</p>
-                                    <p className="items-center justify-center mt-5 font-serif text-lg text-justify">We're now allowing to bring with you your Fur babies,  but not inside the Hotel/Resort. They will stay at the Kennels provided outside the Hotel/Resort (Free of Charge).</p>
-                                    </div> } />
-                        </div>
-                </div>
-
-                {/* Box 2 */}
-                <div className="bg-[#C68A43] shadow-lg inner-shadow p-4 w-[308px] h-[380px] flex justify-center items-center">
-                        <div className="w-[250px] h-[150px] ml-10 mr-10 mb-20 mt-[-100px]">
-                            <Slideshow images={images3} />
-                                <p className="mt-2 mb-16 font-serif text-lg font-semibold text-center text-black">Prenup / Pictorial Rate</p>
-                                <SeeMoreButton content={
-                                    <div> 
-                                    <p className="items-center justify-center font-serif text-2xl font-semibold">Prenup / Pictorial Rate</p>
-                                    <p className="justify-center mt-2 font-serif text-lg font-semibold">Morning to Sundown</p>
-                                    <p className="justify-center mt-3 font-serif text-lg font-semibold">Package A</p>
-                                    <p className="justify-center mt-3 font-serif text-lg font-semibold">Rate: 9,050.00php</p>
-                                    <ul className="mt-4 mb-1 space-y-2 font-serif text-justify text-md">
-                                    <li> - Only the 2 pax will stay overnight </li>
-                                    <li> - HMUA/Photo Videographer</li>
-                                    <li> - 400.00 per head</li>
-                                    </ul>
-                                    <p className="justify-center mt-3 font-serif text-lg font-semibold">Package B</p>
-                                    <p className="justify-center mt-3 font-serif text-lg font-semibold">Rate: 4,250.00 php</p>
-                                    <ul className="mt-4 mb-1 space-y-2 font-serif text-justify text-md">
-                                    <li> - KUBO ONLY</li>
-                                    <li> - Only the Couple/Model ARE FREE</li>
-                                    <li> - 400.00 php per head</li>
-                                    <li> - HMUA / Photographer / Videographer</li>
-                                    </ul>
-                                    </div> } />
-                        </div>
-                </div>
-
-                {/* Box 3 */}
-                <div className="bg-[#C68A43] shadow-lg inner-shadow p-4 w-[308px] h-[380px] flex justify-center items-center">
-                        <div className="w-[250px] h-[150px] ml-10 mr-10 mb-20 mt-[-100px]">
-                            <Slideshow images={images4} />
-                                <p className="mt-2 mb-16 font-serif text-lg font-semibold text-center text-black">Day Tour Rates</p>
-                                <SeeMoreButton content={
-                                    <div> 
-                                    <p className="items-center justify-center font-serif text-2xl font-semibold">Day Tour Rates</p>
-                                    <p className="justify-center mt-2 font-serif text-lg font-semibold">8am To Sun Down</p>
-                                    <p className="justify-center mt-1 font-serif text-lg font-semibold">(Daytime Rate)</p>
-                                    <p className="justify-center mt-5 font-serif text-lg font-semibold">Entrance Fee</p>
-                                    <ul className="mt-4 mb-1 space-y-2 font-serif text-justify text-md">
-                                    <li> - ₱250.00 - 6yrs old to 12 yrs old </li>
-                                    <li> - ₱400.00- 13 - 59 yrs old </li>
-                                    <li> - ₱300.00 - PWD / SEÑIOR</li>
-                                    </ul>
-                                    <p className="justify-center mt-5 font-serif text-lg font-semibold">Kubo Rental Fee</p>
-                                    <ul className="mt-4 mb-1 space-y-2 font-serif text-justify text-md">
-                                    <li> - ₱800.00 - Kubo for 8pax</li>
-                                    </ul>
-                                    <p className="justify-center mt-5 font-serif text-lg font-semibold">View Deck Unit 1 & 2</p>
-                                    <ul className="mt-4 mb-1 space-y-2 font-serif text-justify text-md">
-                                    <li> - ₱1,500.00 View Deck for 10pax</li>
-                                    </ul>
-                                    </div> } />
-                        </div>
-                </div>
-
-                {/* Box 4 */}
-                <div className="bg-[#C68A43] shadow-lg inner-shadow p-4 w-[308px] h-[380px] flex justify-center items-center">
-                        <div className="w-[250px] h-[150px] ml-10 mr-10 mb-20 mt-[-100px]">
-                            <Slideshow images={images5} />
-                                <p className="mt-4 mb-16 font-serif text-lg font-semibold text-center text-black">On Going Promos</p>
-                                <SeeMoreButton content={
-                                    <div> 
-                                    <p className="items-center justify-center font-serif text-2xl font-semibold">On Going Promos!</p>
-                                    <p className="items-center justify-center mt-5 font-serif text-lg text-justify">Stay tuned on our facebook page "Bani-Hidden Paradise Beach Resort" for exclusive offers that promise to elevate your experience at Bani Hidden Paradise Resort! Whether you’re planning a romantic getaway or an adventurous family retreat, our special packages are designed to create unforgettable memories. Don’t miss out on the chance to indulge in paradise—your dream escape awaits!</p>
-                                    </div> } />
-                        </div>
-                </div>
-        </div>
+        <SpecialOffersBox />
+        
     </div>
 
     <footer/>
