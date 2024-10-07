@@ -13,7 +13,6 @@ import '@mantine/charts/styles.css';
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 import { Root } from './pages/Root.tsx';
-import { Homepage } from './pages/Homepage.tsx'
 import { Hotel } from './pages/Hotel.tsx';
 import { Locations } from './pages/Locations.tsx';
 import { Restaurants } from './pages/Restaurants.tsx';
@@ -27,10 +26,6 @@ const router = createBrowserRouter([
         children: [
           {
             path: '/',
-            element: <Homepage />
-          },
-          {
-            path: '/hotel',
             element: <Hotel />
           },
           {

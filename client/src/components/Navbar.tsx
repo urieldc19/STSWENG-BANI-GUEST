@@ -18,7 +18,7 @@ export function Navbar () {
                 <div className="mx-12 flex items-center justify-between h-full">
                     <div className="flex-1 m-auto">
                         <div className="flex items-center justify-between space-x-12 h-full">
-                            <Header link={'/hotel'} title={"The Hotel"} />
+                            <Header link={'/'} title={"The Hotel"} />
                             <Header link={'/rooms'} title={"Rooms"} />
                             <Header link={'/locations'} title={"Locations & Contacts"} />
                             <Link to={'/'}><Image h={50} src='./images/navbar-logo.png'></Image></Link>
