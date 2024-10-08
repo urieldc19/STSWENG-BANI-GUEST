@@ -45,7 +45,7 @@ const RoomAvailabilityBar = () => {
         
         const rooms = [
             {
-                images: ['./images/reservations/slideshow4.png'],
+                images: ['./images/reservations/room123.png', './images/reservations/room123(2).png' ],
                 name: 'Room 1',
                 price: '₱9,600/night',
                 description: (
@@ -56,7 +56,7 @@ const RoomAvailabilityBar = () => {
                 isAvailable: true,
             },
             {
-                images: [],
+                images: ['./images/reservations/room123.png', './images/reservations/room123(2).png'],
                 name: 'Room 2',
                 price: '₱9,600/night',
                 description: (
@@ -67,7 +67,7 @@ const RoomAvailabilityBar = () => {
                 isAvailable: false,
             },
             {
-                images: [],
+                images: ['./images/reservations/room123.png', './images/reservations/room123(2).png'],
                 name: 'Room 3',
                 price: '₱9,600/night',
                 description: (
@@ -78,7 +78,7 @@ const RoomAvailabilityBar = () => {
                 isAvailable: true,
             },
             {
-                images: [],
+                images: ['./images/reservations/room456.png', './images/reservations/room456(2).png'],
                 name: 'Room 4',
                 price: '₱4,200/night',
                 description: (
@@ -89,7 +89,7 @@ const RoomAvailabilityBar = () => {
                 isAvailable: false,
             },
             {
-                images: [],
+                images: ['./images/reservations/room456.png', './images/reservations/room456(2).png'],
                 name: 'Room 5',
                 price: '₱4,200/night',
                 description: (
@@ -100,7 +100,7 @@ const RoomAvailabilityBar = () => {
                 isAvailable: true,
             },
             {
-                images: [],
+                images: ['./images/reservations/room456.png', './images/reservations/room456(2).png'],
                 name: 'Room 6',
                 price: '₱4,200/night',
                 description: (
@@ -108,10 +108,10 @@ const RoomAvailabilityBar = () => {
                         <p>Romantic retreats await! Our cozy room for two is the perfect getaway for couples looking to relax and reconnect.</p>
                     </div>
                 ),
-                isAvailable: true,
+                isAvailable: false,
             },
             {
-                images: [],
+                images: ['./images/reservations/room7.png', './images/reservations/room7(2).png'],
                 name: 'Room 7',
                 price: '₱10,000/night',
                 description: (
@@ -122,7 +122,7 @@ const RoomAvailabilityBar = () => {
                 isAvailable: true,
             },
             {
-                images: [],
+                images: ['./images/reservations/room8.png', './images/reservations/room8(2).png'],
                 name: 'Room 8',
                 price: '₱11,000/night',
                 description: (
@@ -133,7 +133,7 @@ const RoomAvailabilityBar = () => {
                 isAvailable: true,
             },
             {
-                images: [],
+                images: ['./images/reservations/room9.png', './images/reservations/room9(2).png', './images/reservations/room9(3).png'],
                 name: 'Room 9',
                 price: '₱13,500/night',
                 description: (
@@ -144,7 +144,7 @@ const RoomAvailabilityBar = () => {
                 isAvailable: true,
             },
             {
-                images: [],
+                images: ['./images/reservations/villa.png', './images/reservations/villa(2).png', './images/reservations/villa(3).png'],
                 name: 'Villa',
                 price: '₱15,00/night',
                 description: (
@@ -152,10 +152,10 @@ const RoomAvailabilityBar = () => {
                         <p>Bring the whole crew! Our spacious room is perfect for 6 to 8 guests, making it the spot for family and friends gatherings!</p>
                     </div>
                 ),
-                isAvailable: false,
+                isAvailable: true,
             },
             {
-                images: [],
+                images: ['./images/reservations/kubo.png', './images/reservations/kubo(2).png'],
                 name: 'Hanging Kubo',
                 price: '₱5,000/night',
                 description: (
@@ -247,7 +247,7 @@ const RoomAvailabilityBar = () => {
                     {filterAvailableRooms().map((room, index) => (
                         <AvailableRoom
                             key={index}
-                            images={room.images}
+                            images={room.images} 
                             name={room.name}
                             price={room.price}
                             description={room.description}
@@ -262,3 +262,4 @@ const RoomAvailabilityBar = () => {
 
 
 export default RoomAvailabilityBar;
+
