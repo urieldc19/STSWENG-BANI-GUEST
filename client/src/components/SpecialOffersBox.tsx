@@ -3,10 +3,10 @@ import { Slideshow } from "./Slideshow";
 
 const InfoBox = ({images, title, content } : {images: string[], title: string, content: JSX.Element}) => {
     return (
-        <div className={`bg-[#C68A43] shadow-lg inner-shadow p-4 w-[308px] h-[380px] flex justify-center items-center`}>
+        <div className={`bg-[#CBA989] shadow-lg p-4 w-[308px] h-[380px] flex justify-center items-center`}>
             <div className="w-[250px] h-[150px] ml-10 mr-10 mb-20 mt-[-100px]">
                 <Slideshow images={images} />
-                <p className="mt-3 font-serif text-lg font-semibold text-center text-black">{title}</p>
+                <p className="mt-3 font-serif text-lg font-bold text-left text-black">{title}</p>
                 <SeeMoreButton content={content} />
             </div>
         </div>
@@ -40,7 +40,7 @@ const SpecialOffersBox = () => {
     const boxesData = [
         {
             images: images2,
-            title: "Let your fur babies be with you",
+            title: "Let your fur baby be with you",
             content: (
                 <div>
                     <p className="items-center justify-center font-serif text-2xl font-semibold">Let your fur babies be with YOU!</p>
@@ -125,3 +125,4 @@ const SpecialOffersBox = () => {
 };
 
 export default SpecialOffersBox
+
