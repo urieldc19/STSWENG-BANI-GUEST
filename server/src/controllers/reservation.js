@@ -1,6 +1,6 @@
 const { Client, Reservation } = require('../models/models.js')
 
-async function clientChecker (clientEntry) {
+async function checkClient (clientEntry) {
 
     try {
 
@@ -36,6 +36,14 @@ async function clientChecker (clientEntry) {
     }
 }
 
+async function getReferenceNo () {
+    const reservationCount = await Reservation.countDocuments()
+
+    const referenceNo = `R${String(reservationCount + 1).padStart(8, '0')}`
+
+    return referenceNo
+}
+
 const createReservation = async (req, res) => {
 
     try {
@@ -68,11 +76,8 @@ const createReservation = async (req, res) => {
             address
         }
 
-        const clientId = await clientChecker(clientEntry)
-
-        const reservationCount = await Reservation.countDocuments()
-
-        const referenceNo = `R${String(reservationCount + 1).padStart(8, '0')}`;
+        const clientId = await checkClient(clientEntry)
+        const referenceNo = await getReferenceNo()
 
         const reservationEntry = {
             referenceNo,
@@ -97,8 +102,7 @@ const createReservation = async (req, res) => {
     } catch (error) {
 
         res.status(500).json({message: "Reservation creation failed"})
-        console.error(error)
     }
 };
 
-module.exports = createReservation
+module.exports = {checkClient, getReferenceNo, createReservation}
