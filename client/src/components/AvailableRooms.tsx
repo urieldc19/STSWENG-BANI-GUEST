@@ -13,7 +13,7 @@ interface AvailableRoomProps {
 const AvailableRoom: React.FC<AvailableRoomProps> = ({ images, name, price, description }) => {
     return (
         <div className="flex flex-col items-center bg-[#2F515B] p-4 rounded-lg shadow-lg m-2 w-[300px]">
-            <div className="w-[250px] h-[150px] ml-10 mr-10 mb-2 mt-5">
+            <div className="object-cover w-full h-40 mt-5 mb-2 overflow-hidden">
             <Slideshow images={images} />
             </div>
                 <h4 className="mt-2 text-lg font-semibold text-[#F2EFE8] font-serif">{name}</h4>
