@@ -2,29 +2,9 @@
 
 import { useState } from 'react';
 import AvailableRoom from "../components/AvailableRooms";
+import { NativeSelect } from '@mantine/core';
 
-interface RoomAvailabilityBarProps {
-    checkInDate: string;
-    setCheckInDate: (date: string) => void;
-    checkOutDate: string;
-    setCheckOutDate: (date: string) => void;
-    adultGuests: number;
-    setAdultGuests: (count: number) => void;
-    childrenGuests: number;
-    setChildrenGuests: (count: number) => void;
-}
-
-
-const RoomAvailabilityBar: React.FC<RoomAvailabilityBarProps> = ({
-    checkInDate,
-    setCheckInDate,
-    checkOutDate,
-    setCheckOutDate,
-    adultGuests,
-    setAdultGuests,
-    childrenGuests,
-    setChildrenGuests,
-}) => {
+const RoomAvailabilityBar = () => {
     
     const [availableRooms, setAvailableRooms] = useState<{
         images: string[];
@@ -33,9 +13,6 @@ const RoomAvailabilityBar: React.FC<RoomAvailabilityBarProps> = ({
         description: React.ReactNode;
         isAvailable: boolean;
     }[]>([]);
-
-
-
 
     // sample only (need backend for isAvailable and need actual images for the rooms)
     const checkAvailability = () => {
@@ -170,93 +147,100 @@ const RoomAvailabilityBar: React.FC<RoomAvailabilityBarProps> = ({
         return availableRooms.filter(room => room.isAvailable);
     };
 
+    const [checkInDate, setCheckInDate] = useState('')
+    const [checkOutDate, setCheckOutDate] = useState('')
+    const [adultNumber, setAdultNumber] = useState('1')
+    const [childrenNumber, setChildrenNumber] = useState('0')
+    
     return (
 
         <div className="w-[1350px] p-6 mx-auto mt-5 bg-[#A0B1B5] text-black opacity-100 rounded-sm shadow-lg"> 
             <div className="flex flex-col justify-between gap-4 opacity-100 md:flex-row">
-                {/* Check-In Field */}
-                <div className="flex flex-col">
-                    <label className="mb-2 font-serif font-semibold text-left">Check-in</label>
-                    <input
-                        type="date"
-                        value={checkInDate}
-                        onChange={(e) => setCheckInDate(e.target.value)}
+                
+                    {/* Check-In Field */}
+                    <div className="flex flex-col">
+                        <label className="mb-2 font-serif font-semibold text-left">Check-in</label>
+                        <input
+                            type="datetime-local"
+                            value={checkInDate}
+                            onChange={(event) => setCheckInDate(event.currentTarget.value)}
+                        />
                         
-                    />
-                    
-                </div>
+                    </div>
 
-                {/* Check-Out Field */}
-                <div className="flex flex-col">
-                    <label className="mb-2 font-serif font-semibold text-left">Check-out</label>
-                    <input
-                        type="date"
-                        value={checkOutDate}
-                        onChange={(e) => setCheckOutDate(e.target.value)}
+                    {/* Check-Out Field */}
+                    <div className="flex flex-col">
+                        <label className="mb-2 font-serif font-semibold text-left">Check-out</label>
+                        <input
+                            type="datetime-local"
+                            value={checkOutDate}
+                            onChange={(event) => setCheckOutDate(event.currentTarget.value)}
+                        />
                         
-                    />
-                    
-                </div>
+                    </div>
 
-                {/* Number of Guests Field */}
-                <div className="flex flex-col">
-                    <label className="mb-2 font-serif font-semibold text-left">Number of Guest(s)</label>
-                    <div className="flex gap-2">
-                    <select
-                            value={adultGuests}
-                            onChange={(e) => setAdultGuests(Number(e.target.value))}
-                            className="w-[200px] p-2 border rounded-sm"
+                    {/* Number of Guests Field */}
+                    <div className="flex flex-col">
+                        <label className="mb-2 font-serif font-semibold text-left">Number of Adults</label>
+                        <div className="flex gap-2">
+
+                            <NativeSelect
+                                className="w-[200px] rounded-sm"
+                                value={adultNumber}
+                                onChange={(event) => setAdultNumber(event.currentTarget.value)}
+                                data={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
+                            />
+
+                        </div>
+
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label className="mb-2 font-serif font-semibold text-left">Number of Children</label>
+                        <div className="flex gap-2">
+
+                            <NativeSelect
+                                className="w-[200px] rounded-sm"
+                                value={childrenNumber}
+                                onChange={(event) => setChildrenNumber(event.currentTarget.value)}
+                                data={['0','1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
+                            />
+
+                        </div>
+                        
+                    </div>
+
+                    {/* Check Availability Button */}
+                    <div className="flex items-end">
+                    <button
+                            onClick={checkAvailability}
+                            className="font-serif p-2 bg-[#A0B1B5] border border-black text-white font-semibold rounded-sm shadow-md hover:bg-[#2F515B]"
                         >
-                            <option value={1}>1 Adult</option>
-                            <option value={2}>2 Adults</option>
-                            <option value={3}>3 Adults</option>
-                            <option value={4}>4 Adults</option>
-                            <option value={5}>5-10 Adults</option>
-                        </select>
-                        <select
-                            value={childrenGuests}
-                            onChange={(e) => setChildrenGuests(Number(e.target.value))}
-                            className="w-[200px] p-2 border rounded-sm"
-                        >
-                            <option value={0}>No Children</option>
-                            <option value={1}>1 Child</option>
-                            <option value={2}>2 Children</option>
-                            <option value={3}>3 Children</option>
-                            <option value={4}>4-10 Children</option>
-                        </select>
+                            Check Availability
+                        </button>
                     </div>
                 </div>
 
-                {/* Check Availability Button */}
-                <div className="flex items-end">
-                <button
-                        onClick={checkAvailability}
-                        className="font-serif p-2 bg-[#A0B1B5] border border-black text-white font-semibold rounded-sm shadow-md hover:bg-[#2F515B]"
-                    >
-                        Check Availability
-                    </button>
-                </div>
-            </div>
+                {/* Available Rooms */}
+                {filterAvailableRooms().length > 0 && (
+                    <div className="flex flex-wrap justify-center mt-6">
+                        <h3 className="w-full mb-4 font-serif text-xl font-semibold text-center">Available Rooms</h3>
+                        {filterAvailableRooms().map((room, index) => (
+                            <AvailableRoom
+                                key={index}
+                                images={room.images} 
+                                name={room.name}
+                                price={room.price}
+                                description={room.description}
+                                checkInDate={checkInDate}
+                                checkOutDate={checkOutDate}
+                                adultGuests={parseInt(adultNumber)}
+                                childrenGuests={parseInt(childrenNumber)}
+                            />
+                        ))}
+                    </div>
+                )}
 
-            {/* Available Rooms */}
-            {filterAvailableRooms().length > 0 && (
-                <div className="flex flex-wrap justify-center mt-6">
-                    <h3 className="w-full mb-4 font-serif text-xl font-semibold text-center">Available Rooms</h3>
-                    {filterAvailableRooms().map((room, index) => (
-                        <AvailableRoom
-                            key={index}
-                            images={room.images} 
-                            name={room.name}
-                            price={room.price}
-                            description={room.description}
-                            checkInDate={checkInDate}
-                            checkOutDate={checkOutDate}
-                            adultGuests={adultGuests}
-                            childrenGuests={childrenGuests}
-                        />
-                    ))}
-                </div>
-            )}
         </div>
     );
     

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 interface ReserveNowProps {
+    name: string;
     checkInDate: string;
     checkOutDate: string;
     adultGuests: number;
@@ -8,6 +9,7 @@ interface ReserveNowProps {
 }
 
 const ReserveNowButton: React.FC<ReserveNowProps> = ({
+    name,
     checkInDate,
     checkOutDate,
     adultGuests,
@@ -26,6 +28,12 @@ const [otherNotes, setOtherNotes] = useState('');
 const [proofOfPayment, setProofOfPayment] = useState<File | null>(null);
 const [submissionStatus, setSubmissionStatus] = useState('');
 
+console.log(name,
+    checkInDate,
+    checkOutDate,
+    adultGuests,
+    childrenGuests)
+
 const toggleModal = () => {
     setIsOpen(!isOpen);
 
@@ -37,7 +45,7 @@ const toggleModal = () => {
 
     if (isOpen) {
     
-    setRoomPreference('');
+    setRoomPreference(name);
     setPets('no');
     setFirstName('');
     setLastName('');
@@ -79,7 +87,6 @@ const handleSubmit = (e: React.FormEvent) => {
     setTotalGuests(1);
     setOtherNotes('');
     setProofOfPayment(null);
-
 };
 
 return (
@@ -102,7 +109,7 @@ return (
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Check In</label>
                 <input
-                    type="text"
+                    type="datetime-local"
                     value={checkInDate}
                     readOnly
                     className="p-1 border border-gray-300 rounded"
@@ -111,7 +118,7 @@ return (
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Check Out</label>
                 <input
-                type="text"
+                type="datetime-local"
                 value={checkOutDate}
                 readOnly
                 className="p-1 border border-gray-300 rounded"
@@ -131,7 +138,7 @@ return (
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Children</label>
                 <input 
-                type="number" 
+                type="string" 
                 value={childrenGuests} 
                 readOnly 
                 className="p-1 border border-gray-300 rounded"
@@ -141,24 +148,12 @@ return (
 
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Room Preference</label>
-                <select
-                value={roomPreference}
-                onChange={(e) => setRoomPreference(e.target.value)}
+                <input 
+                type="string" 
+                value={name} 
+                readOnly 
                 className="p-1 border border-gray-300 rounded"
-                >
-                <option value="">Select Room</option>
-                <option value="Standard">Room 1</option>
-                <option value="Deluxe">Room 2</option>
-                <option value="Suite">Room 3</option>
-                <option value="Suite">Room 4</option>
-                <option value="Suite">Room 5</option>
-                <option value="Suite">Room 6</option>
-                <option value="Suite">Room 7</option>
-                <option value="Suite">Room 8</option>
-                <option value="Suite">Room 9</option>
-                <option value="Suite">Villa</option>
-                <option value="Suite">Hanging Kubo</option>
-                </select>
+                />
             </div>
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Pets</label>

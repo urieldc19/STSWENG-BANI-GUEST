@@ -32,8 +32,8 @@ const AvailableRoom: React.FC<AvailableRoomProps> = ({
                 <h4 className="mt-2 text-lg font-semibold text-[#F2EFE8] font-serif">{name}</h4>
                 <p className="text-[#F2EFE8] text-md font-serif">{price}</p>
                 <div className="mt-3 text-sm text-justify text-[#F2EFE8] font-serif">{description}</div>
-                <p className="mt-5 mr-3 ml-3 mb-0 text-sm text-left font-semibold text-[#F2EFE8] font-serif">Reserve your room now</p>
                 <ReserveNowButton
+                name={name}
                 checkInDate={checkInDate}
                 checkOutDate={checkOutDate}
                 adultGuests={adultGuests}

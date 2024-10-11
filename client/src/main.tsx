@@ -19,7 +19,7 @@ import { Restaurants } from './pages/Restaurants.tsx';
 import { Rooms } from './pages/Rooms.tsx';
 import { SpecialOffers } from './pages/SpecialOffers.tsx';
 import { Reservations } from './pages/Reservations.tsx';
-import FAQs from './pages/QandA'; 
+//import FAQs from './pages/QandA'; 
 
 const router = createBrowserRouter([
     {
@@ -49,10 +49,10 @@ const router = createBrowserRouter([
             path: '/specialoffers',
             element: <SpecialOffers />
           },
-          {
+          /*{
             path: '/FAQS', 
             element: <FAQs />          
-          },
+          },*/
         ]
     },
 ]);
