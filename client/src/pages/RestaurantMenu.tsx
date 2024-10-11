@@ -13,8 +13,8 @@ export function RestaurantMenu() {
         <span>Online Restaurant Menu</span>
       </div>
       <div class="flex flex-col m-6 gap-4">
-        <div class="flex flex-row w-full">
-          <div class="w-9/12">
+        <div class="flex flex-col md:flex-row w-full">
+          <div class="w-full md:w-9/12">
 
             <h1 class="menu-header">Appetizers</h1>
             <div class="menu-item">
@@ -59,12 +59,12 @@ export function RestaurantMenu() {
             </div>
           </div>
 
-          <div class="w-3/12 px-4">
+          <div class="w-full md:w-3/12 py-4 md:py-0 md:px-4">
             <img src="./images/restaurants/slideshow2.png" class="w-full h-full object-cover rounded-lg" />
           </div>
         </div>
-        <div class="flex flex-row w-full gap-8">
-          <div class="flex flex-col w-6/12 gap-4">
+        <div class="flex flex-col md:flex-row w-full gap-8">
+          <div class="flex flex-col md:w-6/12 gap-4">
 
             <div class="flex flex-col w-full">
               <h1 class="menu-header">Paradise Delight</h1>
@@ -172,7 +172,7 @@ export function RestaurantMenu() {
             <img src="./images/restaurants/slideshow3.png" class="w-full h-full object-cover rounded-lg" />
 
           </div>
-          <div class="flex flex-col w-6/12 gap-4">
+          <div class="flex flex-col md:w-6/12 gap-4">
 
             <div class="flex flex-col w-full">
               <h1 class="menu-header">Salad</h1>
@@ -318,8 +318,8 @@ export function RestaurantMenu() {
         </div>
 
         
-        <div class="flex flex-row w-full gap-8">
-          <div class="flex flex-col w-6/12">
+        <div class="flex flex-col md:flex-row w-full gap-8">
+          <div class="flex flex-col md:w-6/12">
             <h1 class="menu-header">Beverages</h1>
             <div class="menu-item">
               <div class="item-name">Lemonade Pitcher</div>
@@ -360,7 +360,7 @@ export function RestaurantMenu() {
             </div>
           </div>
           
-          <div class="flex flex-col w-6/12">
+          <div class="flex flex-col md:w-6/12">
           <h1 class="menu-header">Hard Drinks / Beers</h1>
             <div class="menu-item">
               <div class="item-name">Jack Daniel's <small>1 L</small></div>
