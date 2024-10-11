@@ -7,10 +7,23 @@ interface AvailableRoomProps {
     images: string[];
     name: string;
     price: string;
-    description: React.ReactNode; 
+    description: React.ReactNode;
+    checkInDate: string;
+    checkOutDate: string;
+    adultGuests: number;
+    childrenGuests: number;
 }
 
-const AvailableRoom: React.FC<AvailableRoomProps> = ({ images, name, price, description }) => {
+const AvailableRoom: React.FC<AvailableRoomProps> = ({
+    images,
+    name,
+    price,
+    description,
+    checkInDate,
+    checkOutDate,
+    adultGuests,
+    childrenGuests,
+}) => {
     return (
         <div className="flex flex-col items-center bg-[#2F515B] p-4 rounded-lg shadow-lg m-2 w-[300px]">
             <div className="object-cover w-full h-40 mt-5 mb-2 overflow-hidden">
@@ -20,10 +33,15 @@ const AvailableRoom: React.FC<AvailableRoomProps> = ({ images, name, price, desc
                 <p className="text-[#F2EFE8] text-md font-serif">{price}</p>
                 <div className="mt-3 text-sm text-justify text-[#F2EFE8] font-serif">{description}</div>
                 <p className="mt-5 mr-3 ml-3 mb-0 text-sm text-left font-semibold text-[#F2EFE8] font-serif">Reserve your room now</p>
-                <ReserveNowButton/>
+                <ReserveNowButton
+                checkInDate={checkInDate}
+                checkOutDate={checkOutDate}
+                adultGuests={adultGuests}
+                childrenGuests={childrenGuests}/>
         </div>
     );
 };
 
 export default AvailableRoom;
+
 
