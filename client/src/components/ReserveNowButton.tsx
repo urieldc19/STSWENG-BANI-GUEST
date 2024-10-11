@@ -1,11 +1,19 @@
 import { useState } from 'react';
 
-const ReserveNowButton = () => {
+interface ReserveNowProps {
+    checkInDate: string;
+    checkOutDate: string;
+    adultGuests: number;
+    childrenGuests: number;
+}
+
+const ReserveNowButton: React.FC<ReserveNowProps> = ({
+    checkInDate,
+    checkOutDate,
+    adultGuests,
+    childrenGuests,
+}) =>  {
 const [isOpen, setIsOpen] = useState(false);
-const [checkIn, setCheckIn] = useState('');
-const [checkOut, setCheckOut] = useState('');
-const [adults, setAdults] = useState(1);
-const [children, setChildren] = useState(0);
 const [roomPreference, setRoomPreference] = useState('');
 const [pets, setPets] = useState('no');
 const [firstName, setFirstName] = useState('');
@@ -29,10 +37,6 @@ const toggleModal = () => {
 
     if (isOpen) {
     
-    setCheckIn('');
-    setCheckOut('');
-    setAdults(1);
-    setChildren(0);
     setRoomPreference('');
     setPets('no');
     setFirstName('');
@@ -51,7 +55,7 @@ const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     //validation (need backend)
-    if (!checkIn || !checkOut || !adults || !children || !firstName || !lastName || !roomPreference || !email || !phone || !address || !proofOfPayment) {
+    if ( !firstName || !lastName || !roomPreference || !email || !phone || !address || !proofOfPayment) {
     setSubmissionStatus('[System Message] Please fill out all the required fields.');
     return;
     }
@@ -60,36 +64,11 @@ const handleSubmit = (e: React.FormEvent) => {
     setSubmissionStatus('[System Message] Contact number must be a number with exactly 11 digits.');
     return;
     }
-
-    const checkInDate = new Date(checkIn);
-    const checkOutDate = new Date(checkOut);
-
     
-    if (isNaN(checkInDate.getTime()) || isNaN(checkOutDate.getTime())) {
-        setSubmissionStatus('[System Message] Please select valid check-in and check-out dates.');
-        return;
-    }
-
-    
-    if (checkInDate >= checkOutDate) {
-        setSubmissionStatus('[System Message] Check-out date must be after check-in date.');
-        return;
-    }
-
-    
-    const today = new Date();
-    if (checkInDate < today || checkOutDate < today) {
-        setSubmissionStatus('[System Message] Check-in and check-out dates must be today or in the future.');
-        return;
-    }
     
     setSubmissionStatus('Reservation successfully submitted.');
 
     //Reset Fields
-    setCheckIn('');
-    setCheckOut('');
-    setAdults(1);
-    setChildren(0);
     setRoomPreference('');
     setPets('no');
     setFirstName('');
@@ -100,6 +79,7 @@ const handleSubmit = (e: React.FormEvent) => {
     setTotalGuests(1);
     setOtherNotes('');
     setProofOfPayment(null);
+
 };
 
 return (
@@ -122,49 +102,40 @@ return (
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Check In</label>
                 <input
-                type="date"
-                value={checkIn}
-                onChange={(e) => setCheckIn(e.target.value)}
-                className="p-1 border border-gray-300 rounded"
-                />
+                    type="text"
+                    value={checkInDate}
+                    readOnly
+                    className="p-1 border border-gray-300 rounded"
+                    />
             </div>
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Check Out</label>
                 <input
-                type="date"
-                value={checkOut}
-                onChange={(e) => setCheckOut(e.target.value)}
+                type="text"
+                value={checkOutDate}
+                readOnly
                 className="p-1 border border-gray-300 rounded"
                 />
             </div>
 
             <div className="flex flex-col">
-                <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Adults</label>
-                <select
-                value={adults}
-                onChange={(e) => setAdults(parseInt(e.target.value))}
-                className="p-1 border border-gray-300 rounded"
-                >
-                {[...Array(10).keys()].map(num => (
-                    <option key={num} value={num + 1}>
-                    {num + 1}
-                    </option>
-                ))}
-                </select>
+            <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Adults</label>
+            <input 
+            type="number" 
+            value={adultGuests} 
+            readOnly 
+            className="p-1 border border-gray-300 rounded"
+            />
             </div>
+
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Children</label>
-                <select
-                value={children}
-                onChange={(e) => setChildren(parseInt(e.target.value))}
+                <input 
+                type="number" 
+                value={childrenGuests} 
+                readOnly 
                 className="p-1 border border-gray-300 rounded"
-                >
-                {[...Array(6).keys()].map(num => (
-                    <option key={num} value={num}>
-                    {num}
-                    </option>
-                ))}
-                </select>
+                />
             </div>
 
 
@@ -327,4 +298,5 @@ return (
 };
 
 export default ReserveNowButton;
+
 
