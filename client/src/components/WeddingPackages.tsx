@@ -144,16 +144,16 @@ const WeddingPackagesCarousel = () => {
 
             {/* Carousel Controls */}
             <button
-                onClick={handlePrev}
-                className="absolute left-0 px-4 py-2 text-white transform -translate-y-1/2 bg-black bg-opacity-50 top-1/2 hover:bg-opacity-75"
+            onClick={handlePrev}
+            className="absolute px-4 py-2 text-3xl text-white transform -translate-y-1/2 bg-black rounded-full shadow-lg left-8 bg-opacity-70 top-1/2 hover:bg-opacity-90"
             >
-                Prev
+                &lt;
             </button>
             <button
-                onClick={handleNext}
-                className="absolute right-0 px-4 py-2 text-white transform -translate-y-1/2 bg-black bg-opacity-50 top-1/2 hover:bg-opacity-75"
+            onClick={handleNext}
+            className="absolute px-4 py-2 text-3xl text-white transform -translate-y-1/2 bg-black rounded-full shadow-lg right-8 bg-opacity-70 top-1/2 hover:bg-opacity-90"
             >
-                Next
+                &gt;
             </button>
         </div>
     );
