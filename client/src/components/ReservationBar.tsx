@@ -3,13 +3,29 @@
 import { useState } from 'react';
 import AvailableRoom from "../components/AvailableRooms";
 
+interface RoomAvailabilityBarProps {
+    checkInDate: string;
+    setCheckInDate: (date: string) => void;
+    checkOutDate: string;
+    setCheckOutDate: (date: string) => void;
+    adultGuests: number;
+    setAdultGuests: (count: number) => void;
+    childrenGuests: number;
+    setChildrenGuests: (count: number) => void;
+}
 
-const RoomAvailabilityBar = () => {
+
+const RoomAvailabilityBar: React.FC<RoomAvailabilityBarProps> = ({
+    checkInDate,
+    setCheckInDate,
+    checkOutDate,
+    setCheckOutDate,
+    adultGuests,
+    setAdultGuests,
+    childrenGuests,
+    setChildrenGuests,
+}) => {
     
-    const [checkInDate, setCheckInDate] = useState('');
-    const [checkOutDate, setCheckOutDate] = useState('');
-    const [adultGuests, setAdultGuests] = useState<number>(1);
-    const [childrenGuests, setChildrenGuests] = useState<number>(0);
     const [availableRooms, setAvailableRooms] = useState<{
         images: string[];
         name: string;
@@ -18,30 +34,11 @@ const RoomAvailabilityBar = () => {
         isAvailable: boolean;
     }[]>([]);
 
-    const [errors, setErrors] = useState<{ checkIn?: string; checkOut?: string }>({});
 
-    // Validation For CheckIn and CheckOut
-    const validateDates = () => {
-        let validationErrors: { checkIn?: string; checkOut?: string } = {};
 
-        const today = new Date().toISOString().split('T')[0];
-        if (!checkInDate || checkInDate < today) {
-            validationErrors.checkIn = "Check-in date cannot be in the past or empty.";
-        }
-
-        if (!checkOutDate || checkOutDate <= checkInDate) {
-            validationErrors.checkOut = "Check-out date must be after the check-in date.";
-        }
-
-        setErrors(validationErrors);
-        return Object.keys(validationErrors).length === 0;
-    };
 
     // sample only (need backend for isAvailable and need actual images for the rooms)
     const checkAvailability = () => {
-        if (!validateDates()) {
-            return; // prompts error
-        }
         
         const rooms = [
             {
@@ -146,7 +143,7 @@ const RoomAvailabilityBar = () => {
             {
                 images: ['./images/reservations/villa.png', './images/reservations/villa(2).png', './images/reservations/villa(3).png'],
                 name: 'Villa',
-                price: '₱15,00/night',
+                price: '₱15,000/night',
                 description: (
                     <div>
                         <p>Bring the whole crew! Our spacious room is perfect for 6 to 8 guests, making it the spot for family and friends gatherings!</p>
@@ -172,6 +169,7 @@ const RoomAvailabilityBar = () => {
     const filterAvailableRooms = () => {
         return availableRooms.filter(room => room.isAvailable);
     };
+
     return (
 
         <div className="w-[1350px] p-6 mx-auto mt-5 bg-[#A0B1B5] text-black opacity-100 rounded-sm shadow-lg"> 
@@ -183,9 +181,9 @@ const RoomAvailabilityBar = () => {
                         type="date"
                         value={checkInDate}
                         onChange={(e) => setCheckInDate(e.target.value)}
-                        className={`p-1 border w-[230px] border-gray-300 rounded-sm ${errors.checkIn ? 'border-red-500' : ''}`}
+                        
                     />
-                    {errors.checkIn && <p className="text-sm text-red-900">{errors.checkIn}</p>}
+                    
                 </div>
 
                 {/* Check-Out Field */}
@@ -195,16 +193,16 @@ const RoomAvailabilityBar = () => {
                         type="date"
                         value={checkOutDate}
                         onChange={(e) => setCheckOutDate(e.target.value)}
-                        className={`p-1 border w-[230px] border-gray-300 rounded-sm ${errors.checkOut ? 'border-red-500' : ''}`}
+                        
                     />
-                    {errors.checkOut && <p className="text-sm text-red-900">{errors.checkOut}</p>}
+                    
                 </div>
 
                 {/* Number of Guests Field */}
                 <div className="flex flex-col">
                     <label className="mb-2 font-serif font-semibold text-left">Number of Guest(s)</label>
                     <div className="flex gap-2">
-                        <select
+                    <select
                             value={adultGuests}
                             onChange={(e) => setAdultGuests(Number(e.target.value))}
                             className="w-[200px] p-2 border rounded-sm"
@@ -218,7 +216,7 @@ const RoomAvailabilityBar = () => {
                         <select
                             value={childrenGuests}
                             onChange={(e) => setChildrenGuests(Number(e.target.value))}
-                            className="w-[200px]p-2 border rounded-sm"
+                            className="w-[200px] p-2 border rounded-sm"
                         >
                             <option value={0}>No Children</option>
                             <option value={1}>1 Child</option>
@@ -231,7 +229,7 @@ const RoomAvailabilityBar = () => {
 
                 {/* Check Availability Button */}
                 <div className="flex items-end">
-                    <button
+                <button
                         onClick={checkAvailability}
                         className="font-serif p-2 bg-[#A0B1B5] border border-black text-white font-semibold rounded-sm shadow-md hover:bg-[#2F515B]"
                     >
@@ -251,6 +249,10 @@ const RoomAvailabilityBar = () => {
                             name={room.name}
                             price={room.price}
                             description={room.description}
+                            checkInDate={checkInDate}
+                            checkOutDate={checkOutDate}
+                            adultGuests={adultGuests}
+                            childrenGuests={childrenGuests}
                         />
                     ))}
                 </div>
@@ -262,4 +264,5 @@ const RoomAvailabilityBar = () => {
 
 
 export default RoomAvailabilityBar;
+
 
