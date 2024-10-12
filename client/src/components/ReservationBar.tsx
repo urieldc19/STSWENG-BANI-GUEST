@@ -4,6 +4,7 @@ import { useState } from 'react';
 import AvailableRoom from "../components/AvailableRooms";
 import { NativeSelect } from '@mantine/core';
 
+
 const RoomAvailabilityBar = () => {
     
     const [availableRooms, setAvailableRooms] = useState<{
@@ -13,9 +14,52 @@ const RoomAvailabilityBar = () => {
         description: React.ReactNode;
         isAvailable: boolean;
     }[]>([]);
+    
+    const [checkInDate, setCheckInDate] = useState('');
+    const [checkOutDate, setCheckOutDate] = useState('');
+    const [adultNumber, setAdultNumber] = useState('1');
+    const [childrenNumber, setChildrenNumber] = useState('0');
+    const [validationErrors, setValidationErrors] = useState<{ checkIn?: string; checkOut?: string }>({});
 
-    // sample only (need backend for isAvailable and need actual images for the rooms)
+    const validateDates = () => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        let errors: { checkIn?: string; checkOut?: string } = {};
+
+        
+        const checkIn = new Date(checkInDate);
+        checkIn.setHours(0, 0, 0, 0); 
+        const checkOut = new Date(checkOutDate);
+        checkOut.setHours(0, 0, 0, 0);
+
+        
+        if (!checkInDate || checkIn < today) {
+            errors.checkIn = "Check-in date cannot be in the past or empty.";
+        }
+
+        
+        if (!checkOutDate || checkOut <= checkIn) {
+            errors.checkOut = "Check-out date must be after the check-in date.";
+        }
+
+        
+        if (Object.keys(errors).length > 0) {
+            setValidationErrors(errors);
+            return false;
+        }
+
+        
+        setValidationErrors({});
+        return true;
+    };
+
+
+
+    // Sample only (needs backend for isAvailable and actual images for the rooms)
     const checkAvailability = () => {
+        if (!validateDates()) {
+            return; // Stop if validation fails
+        }
         
         const rooms = [
             {
@@ -147,10 +191,6 @@ const RoomAvailabilityBar = () => {
         return availableRooms.filter(room => room.isAvailable);
     };
 
-    const [checkInDate, setCheckInDate] = useState('')
-    const [checkOutDate, setCheckOutDate] = useState('')
-    const [adultNumber, setAdultNumber] = useState('1')
-    const [childrenNumber, setChildrenNumber] = useState('0')
     
     return (
 
@@ -161,22 +201,28 @@ const RoomAvailabilityBar = () => {
                     <div className="flex flex-col">
                         <label className="mb-2 font-serif font-semibold text-left">Check-in</label>
                         <input
-                            type="datetime-local"
+                            type="date"
                             value={checkInDate}
                             onChange={(event) => setCheckInDate(event.currentTarget.value)}
+                            className={`p-1 border w-[230px] border-gray-300 rounded-sm`}
                         />
-                        
+                        <div style={{ width: '250px' }}>  
+                        <p className="text-red-500"> 
+                        {validationErrors.checkIn || ""} </p></div>
                     </div>
 
                     {/* Check-Out Field */}
                     <div className="flex flex-col">
                         <label className="mb-2 font-serif font-semibold text-left">Check-out</label>
                         <input
-                            type="datetime-local"
+                            type="date"
                             value={checkOutDate}
                             onChange={(event) => setCheckOutDate(event.currentTarget.value)}
+                            className={`p-1 border w-[230px] border-gray-300 rounded-sm`}
                         />
-                        
+                        <div style={{ width: '250px' }}>  
+                        <p className="text-red-500"> 
+                        {validationErrors.checkOut || ""} </p></div>
                     </div>
 
                     {/* Number of Guests Field */}
@@ -185,7 +231,7 @@ const RoomAvailabilityBar = () => {
                         <div className="flex gap-2">
 
                             <NativeSelect
-                                className="w-[200px] rounded-sm"
+                                className={`w-[230px] rounded-sm`}
                                 value={adultNumber}
                                 onChange={(event) => setAdultNumber(event.currentTarget.value)}
                                 data={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
@@ -200,7 +246,7 @@ const RoomAvailabilityBar = () => {
                         <div className="flex gap-2">
 
                             <NativeSelect
-                                className="w-[200px] rounded-sm"
+                                className="w-[230px] rounded-sm"
                                 value={childrenNumber}
                                 onChange={(event) => setChildrenNumber(event.currentTarget.value)}
                                 data={['0','1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
@@ -238,15 +284,14 @@ const RoomAvailabilityBar = () => {
                                 childrenGuests={parseInt(childrenNumber)}
                             />
                         ))}
-                    </div>
-                )}
-
-        </div>
-    );
-    
-};
+                        </div>
+                    )}
+                </div>
+            );
+        };     
 
 
 export default RoomAvailabilityBar;
+
 
 
