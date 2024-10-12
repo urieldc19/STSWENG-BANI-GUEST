@@ -26,7 +26,7 @@ const AvailableRoom: React.FC<AvailableRoomProps> = ({
 }) => {
     return (
         <div className="flex flex-col items-center bg-[#2F515B] p-4 rounded-lg shadow-lg m-2 w-[300px]">
-            <div className="object-cover w-full h-40 mt-5 mb-2 overflow-hidden">
+            <div className="object-cover w-full mt-5 mb-2 overflow-hidden h-36">
             <Slideshow images={images} />
             </div>
                 <h4 className="mt-2 text-lg font-semibold text-[#F2EFE8] font-serif">{name}</h4>
@@ -43,5 +43,4 @@ const AvailableRoom: React.FC<AvailableRoomProps> = ({
 };
 
 export default AvailableRoom;
-
 
