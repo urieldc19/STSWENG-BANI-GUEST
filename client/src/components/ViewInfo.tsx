@@ -18,7 +18,7 @@ return (
     <>
     
     <button
-        className="ml-[-16px] px-4 py-2 w-64 mx-auto block font-sm font-serif text-left underline font-semibold text-black transition-colors duration-300 hover:text-[#2F515B]"
+        className="ml-[-16px] px-4 py-2 w-64 mx-auto block font-sm font-serif text-left underline font-semibold text-black transition-colors duration-300 hover:text-[#C68A43]"
         onClick={toggleModal}
     >
         Payment Details
