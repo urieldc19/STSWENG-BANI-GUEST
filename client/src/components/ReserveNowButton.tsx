@@ -109,7 +109,7 @@ return (
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Check In</label>
                 <input
-                    type="datetime-local"
+                    type="date"
                     value={checkInDate}
                     readOnly
                     className="p-1 border border-gray-300 rounded"
@@ -118,7 +118,7 @@ return (
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Check Out</label>
                 <input
-                type="datetime-local"
+                type="date"
                 value={checkOutDate}
                 readOnly
                 className="p-1 border border-gray-300 rounded"
@@ -293,5 +293,6 @@ return (
 };
 
 export default ReserveNowButton;
+
 
 
