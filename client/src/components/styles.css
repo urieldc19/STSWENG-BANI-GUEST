@@ -10,4 +10,12 @@ body {
     font-family: 'Inria Serif', serif;
   }
   
+  .footer-logo {
+    height: 60px; 
+    width: auto; 
+}
 
+.footer-column {
+    margin: 0 8px;
+  }
+  
