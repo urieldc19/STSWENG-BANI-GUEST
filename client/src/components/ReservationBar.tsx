@@ -24,7 +24,7 @@ const RoomAvailabilityBar = () => {
     const validateDates = () => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        let errors: { checkIn?: string; checkOut?: string } = {};
+        const errors: { checkIn?: string; checkOut?: string } = {};
 
         
         const checkIn = new Date(checkInDate);
