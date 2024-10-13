@@ -20,7 +20,8 @@ import { RestaurantMenu } from './pages/RestaurantMenu.tsx';
 import { Rooms } from './pages/Rooms.tsx';
 import { SpecialOffers } from './pages/SpecialOffers.tsx';
 import { Reservations } from './pages/Reservations.tsx';
-//import FAQs from './pages/QandA'; 
+import FAQs from './pages/QandA.tsx';
+import { Homepage } from './pages/Homepage.tsx';
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         children: [
           {
             path: '/',
+            element: <Homepage />
+          },
+          {
+            path: '/hotel',
             element: <Hotel />
           },
           {
@@ -54,10 +59,10 @@ const router = createBrowserRouter([
             path: '/specialoffers',
             element: <SpecialOffers />
           },
-          /*{
-            path: '/FAQS', 
+          {
+            path: '/faqs', 
             element: <FAQs />          
-          },*/
+          },
         ]
     },
 ]);
