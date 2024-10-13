@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const { Client, Room, Reservation } = require('./models/models.js')
 
 const app = express()
 const PORT = 3000
@@ -11,3 +10,6 @@ app.use(bodyParser.json());
 
 module.exports = {app, PORT}
 
+const reservation = require("./routes/reservation.js")
+
+app.use("/reservation", reservation)
