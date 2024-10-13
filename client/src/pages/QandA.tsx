@@ -15,15 +15,15 @@ const FAQs: React.FC = () => {
     <div className="p-0">
       <Slideshow images={images} />
 
-      <div className="w-full text-center text-white bg-[#2F515B]/55 py-2 -mt-4"> {/* Adjust negative margin */}
+      <div className="w-full text-center text-white bg-[#2F515B]/55 py-4 -mt-4">
         <img src="/images/logo.png" alt="Logo" className="mx-auto mb-2 w-24 h-24" />
-        <span className="text-[25px]">Bani, Pangasinan | Philippines</span>
+        <span className="text-lg md:text-xl">Bani, Pangasinan | Philippines</span>
       </div>
 
-      <div className="container mx-auto p-4"> 
-        <h2 className="text-center text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6"> 
+        <h2 className="text-center text-3xl md:text-4xl font-bold mb-6">Frequently Asked Questions</h2>
         
-        <p className="text-center text-lg mb-6">
+        <p className="text-center text-lg md:text-xl mb-6">
           To help you plan your visit, we’ve compiled answers to some of the most frequently asked questions. From check-in times and payment options to pet policies and resort amenities, our FAQs provide all the essential information you need to know. If you have any additional questions, feel free to reach out to us directly—we’re here to help!
         </p>
 
