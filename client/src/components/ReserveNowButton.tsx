@@ -1,11 +1,21 @@
 import { useState } from 'react';
 
-const ReserveNowButton = () => {
+interface ReserveNowProps {
+    name: string;
+    checkInDate: string;
+    checkOutDate: string;
+    adultGuests: number;
+    childrenGuests: number;
+}
+
+const ReserveNowButton: React.FC<ReserveNowProps> = ({
+    name,
+    checkInDate,
+    checkOutDate,
+    adultGuests,
+    childrenGuests,
+}) =>  {
 const [isOpen, setIsOpen] = useState(false);
-const [checkIn, setCheckIn] = useState('');
-const [checkOut, setCheckOut] = useState('');
-const [adults, setAdults] = useState(1);
-const [children, setChildren] = useState(0);
 const [roomPreference, setRoomPreference] = useState('');
 const [pets, setPets] = useState('no');
 const [firstName, setFirstName] = useState('');
@@ -18,6 +28,12 @@ const [otherNotes, setOtherNotes] = useState('');
 const [proofOfPayment, setProofOfPayment] = useState<File | null>(null);
 const [submissionStatus, setSubmissionStatus] = useState('');
 
+console.log(name,
+    checkInDate,
+    checkOutDate,
+    adultGuests,
+    childrenGuests)
+
 const toggleModal = () => {
     setIsOpen(!isOpen);
 
@@ -29,11 +45,7 @@ const toggleModal = () => {
 
     if (isOpen) {
     
-    setCheckIn('');
-    setCheckOut('');
-    setAdults(1);
-    setChildren(0);
-    setRoomPreference('');
+    setRoomPreference(name);
     setPets('no');
     setFirstName('');
     setLastName('');
@@ -51,7 +63,7 @@ const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     //validation (need backend)
-    if (!checkIn || !checkOut || !adults || !children || !firstName || !lastName || !roomPreference || !email || !phone || !address || !proofOfPayment) {
+    if ( !firstName || !lastName || !roomPreference || !email || !phone || !address || !proofOfPayment) {
     setSubmissionStatus('[System Message] Please fill out all the required fields.');
     return;
     }
@@ -60,36 +72,11 @@ const handleSubmit = (e: React.FormEvent) => {
     setSubmissionStatus('[System Message] Contact number must be a number with exactly 11 digits.');
     return;
     }
-
-    const checkInDate = new Date(checkIn);
-    const checkOutDate = new Date(checkOut);
-
     
-    if (isNaN(checkInDate.getTime()) || isNaN(checkOutDate.getTime())) {
-        setSubmissionStatus('[System Message] Please select valid check-in and check-out dates.');
-        return;
-    }
-
-    
-    if (checkInDate >= checkOutDate) {
-        setSubmissionStatus('[System Message] Check-out date must be after check-in date.');
-        return;
-    }
-
-    
-    const today = new Date();
-    if (checkInDate < today || checkOutDate < today) {
-        setSubmissionStatus('[System Message] Check-in and check-out dates must be today or in the future.');
-        return;
-    }
     
     setSubmissionStatus('Reservation successfully submitted.');
 
     //Reset Fields
-    setCheckIn('');
-    setCheckOut('');
-    setAdults(1);
-    setChildren(0);
     setRoomPreference('');
     setPets('no');
     setFirstName('');
@@ -122,72 +109,51 @@ return (
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Check In</label>
                 <input
-                type="date"
-                value={checkIn}
-                onChange={(e) => setCheckIn(e.target.value)}
-                className="p-1 border border-gray-300 rounded"
-                />
+                    type="date"
+                    value={checkInDate}
+                    readOnly
+                    className="p-1 border border-gray-300 rounded"
+                    />
             </div>
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Check Out</label>
                 <input
                 type="date"
-                value={checkOut}
-                onChange={(e) => setCheckOut(e.target.value)}
+                value={checkOutDate}
+                readOnly
                 className="p-1 border border-gray-300 rounded"
                 />
             </div>
 
             <div className="flex flex-col">
-                <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Adults</label>
-                <select
-                value={adults}
-                onChange={(e) => setAdults(parseInt(e.target.value))}
-                className="p-1 border border-gray-300 rounded"
-                >
-                {[...Array(10).keys()].map(num => (
-                    <option key={num} value={num + 1}>
-                    {num + 1}
-                    </option>
-                ))}
-                </select>
+            <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Adults</label>
+            <input 
+            type="number" 
+            value={adultGuests} 
+            readOnly 
+            className="p-1 border border-gray-300 rounded"
+            />
             </div>
+
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Children</label>
-                <select
-                value={children}
-                onChange={(e) => setChildren(parseInt(e.target.value))}
+                <input 
+                type="string" 
+                value={childrenGuests} 
+                readOnly 
                 className="p-1 border border-gray-300 rounded"
-                >
-                {[...Array(6).keys()].map(num => (
-                    <option key={num} value={num}>
-                    {num}
-                    </option>
-                ))}
-                </select>
+                />
             </div>
 
 
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Room Preference</label>
-                <select
-                value={roomPreference}
-                onChange={(e) => setRoomPreference(e.target.value)}
+                <input 
+                type="string" 
+                value={name} 
+                readOnly 
                 className="p-1 border border-gray-300 rounded"
-                >
-                <option value="">Select Room</option>
-                <option value="Standard">Room 1</option>
-                <option value="Deluxe">Room 2</option>
-                <option value="Suite">Room 3</option>
-                <option value="Suite">Room 4</option>
-                <option value="Suite">Room 5</option>
-                <option value="Suite">Room 6</option>
-                <option value="Suite">Room 7</option>
-                <option value="Suite">Room 8</option>
-                <option value="Suite">Room 9</option>
-                <option value="Suite">Villa</option>
-                <option value="Suite">Hanging Kubo</option>
-                </select>
+                />
             </div>
             <div className="flex flex-col">
                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Pets</label>
