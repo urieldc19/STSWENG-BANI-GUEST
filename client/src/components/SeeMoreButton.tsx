@@ -18,10 +18,10 @@ const SeeMoreButton = ({ content }: { content: React.ReactNode }) => {
     <>
       
       <button
-        className="mt-10 px-4 py-2 w-64 mx-auto block font-serif font-semibold bg-[#CBA989] text-black transition-colors duration-300 border border-black hover:bg-[#2F515B] hover:text-[#F2EFE8]"
+        className="mt-10 px-4 py-2 w-64 mx-auto block font-serif text-left underline font-semibold text-black transition-colors duration-300 hover:text-[#F2EFE8]"
         onClick={toggleModal}
       >
-        See More
+        Learn More
       </button>
 
       
@@ -30,7 +30,7 @@ const SeeMoreButton = ({ content }: { content: React.ReactNode }) => {
           <div className="bg-[#CBA989] p-6 w-[90%] max-w-lg rounded-lg shadow-lg relative opacity-100 z-60">
             {/* Close Button */}
             <button
-              className="absolute text-gray-500 top-2 left-2 hover:text-gray-700"
+              className="absolute text-[#F2EFE8] top-2 left-2 hover:text-gray-700"
               onClick={toggleModal}
             >
               &#x2715;
@@ -48,3 +48,4 @@ const SeeMoreButton = ({ content }: { content: React.ReactNode }) => {
 };
 
 export default SeeMoreButton;
+
