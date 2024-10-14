@@ -1,0 +1,21 @@
+.swiper-pagination-bullet-active {
+    background: #F2EFE8;
+}
+
+.inner-shadow {
+    box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+body {
+    font-family: 'Inria Serif', serif;
+  }
+  
+  .footer-logo {
+    height: 60px; 
+    width: auto; 
+}
+
+.footer-column {
+    margin: 0 8px;
+  }
+  
