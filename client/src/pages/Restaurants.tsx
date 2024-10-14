@@ -11,6 +11,10 @@ export function Restaurants() {
   ];
 
   return (
-    <Slideshow images={images}/>
+    <>
+      <Slideshow images={images}/>
+      <br />
+      <a href="/restaurant_menu" class="underline">Temporary link to restaurant menu</a> (remove in production)
+    </>
   );
 }
