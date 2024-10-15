@@ -25,7 +25,6 @@ const [phone, setPhone] = useState('');
 const [address, setAddress] = useState('');
 const [totalGuests, setTotalGuests] = useState(1);
 const [otherNotes, setOtherNotes] = useState('');
-const [proofOfPayment, setProofOfPayment] = useState<File | null>(null);
 const [submissionStatus, setSubmissionStatus] = useState('');
 
 console.log(name,
@@ -54,7 +53,6 @@ const toggleModal = () => {
     setAddress('');
     setTotalGuests(1);
     setOtherNotes('');
-    setProofOfPayment(null);
     setSubmissionStatus('');
     }
 };
@@ -63,7 +61,7 @@ const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     //validation (need backend)
-    if ( !firstName || !lastName || !roomPreference || !email || !phone || !address || !proofOfPayment) {
+    if ( !firstName || !lastName || !roomPreference || !email || !phone || !address ) {
     setSubmissionStatus('[System Message] Please fill out all the required fields.');
     return;
     }
@@ -86,7 +84,6 @@ const handleSubmit = (e: React.FormEvent) => {
     setAddress('');
     setTotalGuests(1);
     setOtherNotes('');
-    setProofOfPayment(null);
 };
 
 return (
@@ -262,16 +259,6 @@ return (
                 />
             </div>
 
-
-            <div className="flex flex-col col-span-2">
-                <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Proof of Payment</label>
-                <input
-                type="file"
-                onChange={(e) => setProofOfPayment(e.target.files ? e.target.files[0] : null)}
-                className="p-1 border border-gray-300 rounded"
-                />
-            </div>
-
             <div className="col-span-4">
                 <button
                 type="submit"
@@ -293,6 +280,7 @@ return (
 };
 
 export default ReserveNowButton;
+
 
 
 
