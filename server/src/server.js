@@ -12,4 +12,4 @@ module.exports = {app, PORT}
 
 const reservation = require("./routes/reservation.js")
 
-app.use("/reservation", reservation)
+app.use("/api", reservation)

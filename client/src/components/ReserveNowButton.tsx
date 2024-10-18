@@ -59,9 +59,34 @@ const toggleModal = () => {
     }
 };
 
-const handleSubmit = (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    const response = await fetch('/api/sendConfirmationEmail', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            checkInDate: checkInDate, 
+            checkOutDate: checkOutDate, 
+            numberOfAdults: childrenGuests, 
+            numberOfChildren: adultGuests, 
+            numberOfGuests: totalGuests, 
+            pets: pets,  
+            otherNotes: otherNotes,
+            firstName: firstName, 
+            lastName: lastName, 
+            contactNumber: phone,
+            email: email,
+            address: address
+        }),
+    });
+    if (!response.ok) {
+        throw new Error('Failed to create a confirmation email');
+    }
+    console.log("test");
+
     //validation (need backend)
     if ( !firstName || !lastName || !roomPreference || !email || !phone || !address || !proofOfPayment) {
     setSubmissionStatus('[System Message] Please fill out all the required fields.');
@@ -72,8 +97,8 @@ const handleSubmit = (e: React.FormEvent) => {
     setSubmissionStatus('[System Message] Contact number must be a number with exactly 11 digits.');
     return;
     }
-    
-    
+
+
     setSubmissionStatus('Reservation successfully submitted.');
 
     //Reset Fields
