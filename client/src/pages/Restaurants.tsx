@@ -106,8 +106,25 @@ export function Restaurants() {
 					Indulge in authentic cooked meals from Pangasinan, rich in flavors that tell a story of tradition and love.
 					Let the flavors transport you to a tropical escape, where every cup and bite is a moment of pure bliss.
 				</div>
-				<div class="bg-orange-100 p-4 rounded-lg">
-					images go here
+				<div class="bg-orange-100 p-4 rounded-lg large-footer-gallery">
+						<img src="../images/restaurants/slideshow1.png"></img>
+						<img src="../images/restaurants/slideshow2.png"></img>
+						<img src="../images/restaurants/slideshow3.png"></img>
+						<img src="../images/restaurants/slideshow4.png"></img>
+						<img src="../images/restaurants/slideshow5.png"></img>
+						<img src="../images/restaurants/slideshow1.png"></img>
+						<img src="../images/restaurants/slideshow2.png"></img>
+						<img src="../images/restaurants/slideshow3.png"></img>
+						<img src="../images/restaurants/slideshow4.png"></img>
+						<img src="../images/restaurants/slideshow5.png"></img>
+						<img src="../images/restaurants/slideshow1.png"></img>
+						<img src="../images/restaurants/slideshow2.png"></img>
+						<img src="../images/restaurants/slideshow3.png"></img>
+						<img src="../images/restaurants/slideshow4.png"></img>
+						<img src="../images/restaurants/slideshow5.png"></img>
+						<img src="../images/restaurants/slideshow1.png"></img>
+						<img src="../images/restaurants/slideshow2.png"></img>
+						<img src="../images/restaurants/slideshow3.png"></img>
 				</div>
 			</div>
 

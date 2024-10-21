@@ -28,6 +28,21 @@
 	filter: brightness(0.6) saturate(1.5);
 }
 
+/* Restaurant footer gallery */
+.large-footer-gallery {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 0.66rem;
+	justify-content: center;
+}
+.large-footer-gallery > img {
+	border-radius: 0.2rem;
+	width: 24ex;
+	height: 14ex;
+	object-fit: cover;
+}
+
 /* Restaurant Menu */
 h1.menu-header, h2.menu_header, h3.menu-header, h4.menu-header, h5.menu-header, h6.menu_header {
 	width: 100%;
