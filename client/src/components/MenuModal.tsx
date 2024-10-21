@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from "@mantine/core"
 
 export function MenuModal() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -13,11 +14,11 @@ export function MenuModal() {
 	}
 
 	return ( <>
-		<button class="btn-main" onClick={toggleModal}>See menu</button>
+        <Button variant="filled" color="#2F515B" radius="md" onClick={toggleModal}>See menu</Button>
 
 		{isOpen && (
         <div className="fixed inset-0 w-full z-50 flex items-center justify-center bg-black bg-opacity-50">
-			<div className="bg-slate-200 p-6 w-full w-2/3 h-5/6 rounded-lg shadow-lg relative opacity-100 z-60 overflow-y-scroll">
+			<div className="bg-slate-200 p-6 w-2/3 h-5/6 rounded-lg shadow-lg relative opacity-100 z-60 overflow-y-scroll">
 				{/* Close Button */}
 				<button
 				className="absolute text-black top-2 left-2 hover:text-gray-700"

@@ -1,4 +1,5 @@
 import { MenuModal } from "../components/MenuModal";
+import { Button } from "@mantine/core"
 
 export function Restaurants() {
 
@@ -60,7 +61,7 @@ export function Restaurants() {
 					</div>
 					<div class="flex flex-row gap-4">
             <MenuModal />
-            <button class="btn-secondary">Download PDF</button>
+            <Button variant="outline" color="#2F515B" radius="md">Download PDF</Button>
 					</div>
 				</div>
 				<div class="w-5/12 flex flex-col gap-y-4 justify-between">
@@ -93,7 +94,7 @@ export function Restaurants() {
 					Reserve your spot at El Kapetan Café & Restaurant today!
 					</div>
 					<div class="flex flex-row gap-4">
-            <a role="button" class="btn-secondary" href="./reservations">Reserve now</a>
+            <Button component="a" variant="outline" color="#2F515B" radius="md" href="./reservations">Reserve now</Button>
 					</div>
 				</div>
 			</div>
