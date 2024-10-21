@@ -12,7 +12,7 @@ export function Restaurants() {
     <>
 		<div class="image-header">
 			<img src="../images/restaurants/slideshow1.png"></img>
-			<span>El Kapetan and Restaurant</span>
+			<span>El Kapetan Cafe and Restaurant</span>
 		</div>
 
 		<div class="flex flex-col">
@@ -91,7 +91,7 @@ export function Restaurants() {
 					Reserve your spot at El Kapetan Café & Restaurant today!
 					</div>
 					<div class="flex flex-row gap-4">
-						<b>Button here x1</b>
+            <a role="button" class="btn-secondary" href="./reservations">Reserve now</a>
 					</div>
 				</div>
 			</div>

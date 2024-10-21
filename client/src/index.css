@@ -29,20 +29,21 @@
 }
 
 /* Buttons */
-button.btn-main, button.btn-secondary {
+button.btn-main, button.btn-secondary, a.btn-main, a.btn-secondary {
 	border: #2F515B solid 2px;
 	border-radius: 0.50rem;
 	padding: 0.25rem 0.75rem;
+	display: block;
 }
-button.btn-main {
+button.btn-main, a.btn-main {
 	background-color: #2F515B;
 	color: #ffffff;
 }
-button.btn-main:hover {
+button.btn-main:hover, a.btn-main:hover {
 	background-color: #437381;
 	border-color: #437381;
 }
-button.btn-secondary:hover {
+button.btn-secondary:hover, a.btn-secondary:hover {
 	background-color: #43738105;
 	border-color: #437381;
 }
