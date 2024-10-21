@@ -1,3 +1,5 @@
+import { MenuModal } from "../components/MenuModal";
+
 export function Restaurants() {
 
   const images = [
@@ -57,7 +59,7 @@ export function Restaurants() {
 						Indulge in our handcrafted coffee, specialty drinks, and light bites, all prepared with fresh, high-quality ingredients.
 					</div>
 					<div class="flex flex-row gap-4">
-            <button class="btn-main">See menu</button>
+            <MenuModal />
             <button class="btn-secondary">Download PDF</button>
 					</div>
 				</div>
