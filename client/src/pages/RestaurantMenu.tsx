@@ -8,10 +8,6 @@ export function RestaurantMenu() {
 
   return (
     <>
-      <div class="image-header">
-        <img src="./images/restaurants/slideshow1.png"></img>
-        <span>Online Restaurant Menu</span>
-      </div>
       <div class="flex flex-col m-6 gap-4">
         <div class="flex flex-col md:flex-row w-full">
           <div class="w-full md:w-9/12">

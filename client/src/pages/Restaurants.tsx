@@ -1,5 +1,3 @@
-import { Button } from "";
-
 export function Restaurants() {
 
   const images = [
@@ -19,7 +17,7 @@ export function Restaurants() {
 
 		<div class="flex flex-col">
 			<div>
-				<div class="flex flex-col gap-2 px-24 py-4">
+				<div class="flex flex-col gap-2 px-24 py-8">
 					<h1 class="menu-header">Fresh Delicacy</h1>
 					<div> From all around Pangasinan </div>
 					<div>
@@ -59,9 +57,8 @@ export function Restaurants() {
 						Indulge in our handcrafted coffee, specialty drinks, and light bites, all prepared with fresh, high-quality ingredients.
 					</div>
 					<div class="flex flex-row gap-4">
-						<b>Buttons</b>
-						<b>go</b>
-						<b>here</b>
+            <button class="btn-main">See menu</button>
+            <button class="btn-secondary">Download PDF</button>
 					</div>
 				</div>
 				<div class="w-5/12 flex flex-col gap-y-4 justify-between">
