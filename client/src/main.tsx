@@ -16,7 +16,6 @@ import { Root } from './pages/Root.tsx';
 import { Hotel } from './pages/Hotel.tsx';
 import { Locations } from './pages/Locations.tsx';
 import { Restaurants } from './pages/Restaurants.tsx';
-import { RestaurantMenu } from './pages/RestaurantMenu.tsx';
 import { Rooms } from './pages/Rooms.tsx';
 import { SpecialOffers } from './pages/SpecialOffers.tsx';
 import { Reservations } from './pages/Reservations.tsx';
@@ -46,10 +45,6 @@ const router = createBrowserRouter([
           {
             path: '/restaurants',
             element: <Restaurants />
-          },
-          {
-            path: '/restaurant_menu',
-            element: <RestaurantMenu />
           },
           {
             path: '/rooms',
