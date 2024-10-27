@@ -116,7 +116,7 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
         }
         setIsLoading(false)
         
-        //form.reset();
+        setIsOpen(false)
     });
 
 
