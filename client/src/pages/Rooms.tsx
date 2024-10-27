@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; /*npm install react-router-dom*/
 import '../components/styles.css';
 import { Slideshow } from '../components/Slideshow';
 
@@ -17,12 +18,13 @@ export function Rooms() {
         { src: './images/room/luxe_suite.jpg', alt: "Luxe Suite", maxOccupancy: 10, price: 13500.00, bedSize: "3 Queen Size" },
         { src: './images/room/serenity_villa.jpg', alt: "Serenity Villa", maxOccupancy: 8, price: 15000.00, bedSize: "2 Queen Size" },
         { src: './images/room/family_bunk.jpg', alt: "Family Bunk", maxOccupancy: 8, price: 9600.00, bedSize: "2 Bed Bunk" },
-        { src: './images/room/treetop_haven.jpg', alt: "Treetop", maxOccupancy: 6, bedSize: "N/A" }, 
-        { src: './images/room/leisure_day_access.jpg', alt: "Leisure", maxOccupancy: 7, bedSize: "N/A" }  
+        { src: './images/room/treetop_haven.jpg', alt: "Treetop Haven", maxOccupancy: 6, bedSize: "N/A" }, 
+        { src: './images/room/leisure_day_access.jpg', alt: "Leisure Day Access", maxOccupancy: 7, bedSize: "N/A" }  
     ];
 
     const [selectedOccupancy, setSelectedOccupancy] = useState<number | null>(null);
     const [selectedBedSize, setSelectedBedSize] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const fitsOccupancy = (roomMaxOccupancy: number, roomAlt: string) => {
         if (selectedOccupancy === null) return true;
@@ -45,7 +47,6 @@ export function Rooms() {
         }
     };
     
-
     const fitsBedSize = (roomBedSize: string) => {
         if (selectedBedSize === null) return true; 
         return roomBedSize === selectedBedSize;
@@ -60,7 +61,23 @@ export function Rooms() {
     };
 
     const handleRoomClick = (roomAlt: string) => {
-        alert(`You clicked on ${roomAlt}`);  
+        const routes: { [key: string]: string } = {
+            "Family Bunk": "/family-bunk",
+            "Lover's Hideaway": "/lovers-hideaway",
+            "Scenic Balcony Suite": "/scenic-balcony-suite",
+            "Veranda Vista Suite": "/veranda-vista-suite",
+            "Luxe Suite": "/luxe-suite",
+            "Serenity Villa": "/serenity-villa",
+            "Treetop Haven": "/treetop-haven",
+            "Leisure Day Access": "/leisure-day-access"
+        };
+        
+        const path = routes[roomAlt];
+        if (path) {
+            navigate(path);
+        } else {
+            alert(`No route found for ${roomAlt}`);
+        }
     };
 
     return (
