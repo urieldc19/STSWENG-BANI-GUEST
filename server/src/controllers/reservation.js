@@ -95,8 +95,6 @@ const createReservation = async (req, res) => {
             clientId 
         }
 
-        console.log(reservationEntry)
-
         await Reservation.create(reservationEntry)
 
         res.status(201).json({ message: "Reservation created successfully" });
