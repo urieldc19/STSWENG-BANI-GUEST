@@ -1,10 +1,8 @@
 import { Slideshow } from '../components/Slideshow';
 import '../components/styles.css';
 
-// Cover image for the Scenic Balcony Suite
 const coverImage = './images/room-cover/Scenic.png';
 
-// Images for the slideshow
 const slideshowImages = [
   './images/scenic-balcony/scenic-1.png',
   './images/scenic-balcony/scenic-2.png',
