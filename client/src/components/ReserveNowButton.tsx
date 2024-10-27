@@ -13,7 +13,7 @@ interface ReserveNowProps {
     roomCapacity: number;
 }
 
-const handleSubmit = async (values, totalGuests, setSubmissionStatus) => {   
+const handleSubmit = async (values, totalGuests, setSubmissionStatus, checkInDate, checkOutDate) => {   
     
     if (values.pets === 'No') {
         values.pets = false
@@ -28,6 +28,8 @@ const handleSubmit = async (values, totalGuests, setSubmissionStatus) => {
         numberOfChildren: values.childrenGuests,
         numberOfGuests: totalGuests,
         roomId: values.roomPreference,
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
     }
     
     const response = await fetch('/api/createReservation', {
@@ -40,9 +42,9 @@ const handleSubmit = async (values, totalGuests, setSubmissionStatus) => {
         
     if (!response.ok) {
         setSubmissionStatus('Failed to create a reservation')
-        throw new Error('Failed to create a reservation');
+    } else {
+        setSubmissionStatus('Finished creating a reservation')
     }
-        
 };
 
 const ReserveNowButton: React.FC<ReserveNowProps> = ({
@@ -100,7 +102,6 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
             phone: (value) => (/^\d{11}$/.test(value) ? null : 'Contact number must be exactly 11 digits'),
         },
     });
-
     
     const onSubmit = form.onSubmit((values) => {
         
@@ -111,7 +112,7 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
             setSubmissionStatus(`[Error] Total guests cannot exceed the room capacity of ${values.roomCapacity}.`);
             return; 
         } else {
-            handleSubmit(values, totalGuests, setSubmissionStatus)
+            handleSubmit(values, totalGuests, setSubmissionStatus, checkInDate, checkOutDate)
         }
         setIsLoading(false)
         
