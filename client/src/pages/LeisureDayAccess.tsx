@@ -1,5 +1,6 @@
 import { Slideshow } from '../components/Slideshow';
 import '../components/styles.css';
+import { Link } from 'react-router-dom';
 
 const coverImage = './images/room-cover/Leisure.png';
 
@@ -28,7 +29,7 @@ const LeisureDayAccess = () => {
         </div>
         <div className="flex-1 text-left">
           <p className="text-lg md:text-xl">
-          <br /><br /><br /><br /><br />  Experience a day of relaxation and fun with our Leisure Day Access Pass! Perfect for families and individuals, this pass grants you entry to our stunning pool and beach facilities from 8 AM to 6 PM. Whether you’re looking to soak up the sun, take a refreshing dip, or enjoy a leisurely stroll in our garden areas, there's something for everyone. With affordable entrance fees for all ages, you can create wonderful memories while enjoying the beauty of our resort. Embrace the outdoors and unwind in style with your loved ones!
+            Experience a day of relaxation and fun with our Leisure Day Access Pass! Perfect for families and individuals, this pass grants you entry to our stunning pool and beach facilities from 8 AM to 6 PM. Whether you’re looking to soak up the sun, take a refreshing dip, or enjoy a leisurely stroll in our garden areas, there's something for everyone. With affordable entrance fees for all ages, you can create wonderful memories while enjoying the beauty of our resort. Embrace the outdoors and unwind in style with your loved ones!
           </p>
         </div>
       </section>
@@ -49,12 +50,9 @@ const LeisureDayAccess = () => {
           <h3 className="text-2xl font-semibold mb-2">Entrance Fees</h3>
           <ul className="list-disc list-outside pl-5 text-lg mb-4">
             <li>Children (4 - 12 years old): <strong>₱250.00</strong></li>
-                <br />
             <li>Adults (13 - 59 years old): <strong>₱400.00</strong></li>
-                 <br />
             <li>Seniors/PWD: <strong>₱320.00</strong></li>
-                </ul>
-
+          </ul>
         </div>
 
         <div className="w-full md:w-1/2 p-4 bg-[#A0B1B5]/50 rounded-md shadow-md mb-4 md:ml-2 text-left">
@@ -73,9 +71,11 @@ const LeisureDayAccess = () => {
       </div>
 
       <div className="flex justify-center mb-6">
-        <button className="bg-[#966732] text-white px-8 py-4 rounded text-lg font-semibold transition-transform duration-300 ease-in-out transform hover:bg-[#6b4c1e] hover:scale-105">
-          Book Now
-        </button>
+        <Link to="/reservations">
+          <button className="bg-[#966732] text-white px-8 py-4 rounded text-lg font-semibold transition-transform duration-300 ease-in-out transform hover:bg-[#6b4c1e] hover:scale-105">
+            Book Now
+          </button>
+        </Link>
       </div>
     </div>
   );
