@@ -45,7 +45,7 @@ export function Footer() {
           <br />
             <FooterLink link="/hotel" title="THE HOTEL" /> <br />
             <br />
-            <FooterLink link="/special-offers" title="SPECIAL OFFERS" /> <br />
+            <FooterLink link="/specialoffers" title="SPECIAL OFFERS" /> <br />
             <br />
             <FooterLink link="/faqs" title="FAQs" />
           </p>
