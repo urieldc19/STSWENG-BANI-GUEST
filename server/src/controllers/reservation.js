@@ -135,7 +135,7 @@ Check Out Date: ${new Date(body.checkOutDate ?? '').toDateString()}
 Number of Adults: ${body.numberOfAdults}
 Number of Children: ${body.numberOfChildren}
 Total number of Guests: ${body.numberOfGuests}
-Pets: ${body.pets === true ? "Yes" : body.pets === false ? "No" : ""}
+Pets: ${body.pets}
 Other Notes: ${body.otherNotes}
 Contact No.: ${body.contactNumber}
 
