@@ -1,5 +1,6 @@
 import { Slideshow } from '../components/Slideshow';
 import '../components/styles.css';
+import { Link } from 'react-router-dom';
 
 const coverImage = './images/room-cover/Treetop.png';
 
@@ -28,7 +29,7 @@ const TreetopHaven = () => {
         </div>
         <div className="flex-1 text-left">
           <p className="text-lg md:text-xl">
-          <br /><br /><br /><br /><br />  Located among the trees, Treetop Haven offers a unique overnight experience that immerses you in the beauty of nature. This charming hanging kubo is the perfect retreat for families or small groups seeking tranquility and adventure. Enjoy the fresh air and lush surroundings as you relax in this cozy space, designed to foster connection and create lasting memories. With easy access to the pool and beach, you can spend your days soaking up the sun and your evenings under the stars. Experience the essence of nature without sacrificing comfort at Treetop Haven!
+            <br /><br /><br /><br /><br />Located among the trees, Treetop Haven offers a unique overnight experience that immerses you in the beauty of nature. This charming hanging kubo is the perfect retreat for families or small groups seeking tranquility and adventure. Enjoy the fresh air and lush surroundings as you relax in this cozy space, designed to foster connection and create lasting memories. With easy access to the pool and beach, you can spend your days soaking up the sun and your evenings under the stars. Experience the essence of nature without sacrificing comfort at Treetop Haven!
           </p>
         </div>
       </section>
@@ -74,12 +75,14 @@ const TreetopHaven = () => {
       </div>
 
       <div className="flex justify-center mt-6 mb-6">
-        <button 
-          className="bg-[#966732] text-white px-8 py-4 rounded text-lg font-semibold transition-transform duration-300 ease-in-out transform hover:bg-[#6b4c1e] hover:scale-105" 
-          aria-label="Book the Treetop Haven"
-        >
-          Book Now
-        </button>
+        <Link to="/reservations">
+          <button 
+            className="bg-[#966732] text-white px-8 py-4 rounded text-lg font-semibold transition-transform duration-300 ease-in-out transform hover:bg-[#6b4c1e] hover:scale-105" 
+            aria-label="Book the Treetop Haven"
+          >
+            Book Now
+          </button>
+        </Link>
       </div>
     </div>
   );
