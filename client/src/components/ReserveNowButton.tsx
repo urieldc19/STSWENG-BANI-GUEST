@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useForm } from '@mantine/form';
-import { TextInput} from '@mantine/core';
+import { NativeSelect, TextInput} from '@mantine/core';
+import axios from 'axios'
+
 
 interface ReserveNowProps {
     name: string;
@@ -11,6 +13,40 @@ interface ReserveNowProps {
     roomCapacity: number;
 }
 
+const handleSubmit = async (values, totalGuests, setSubmissionStatus, checkInDate, checkOutDate) => {   
+    
+    if (values.pets === 'No') {
+        values.pets = false
+    } else {
+        values.pets = true
+    }
+
+    const body = {
+        ...values,
+        contactNumber: values.phone,
+        numberOfAdults: values.adultGuests,
+        numberOfChildren: values.childrenGuests,
+        numberOfGuests: totalGuests,
+        roomId: values.roomPreference,
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
+    }
+    
+    const response = await fetch('/api/createReservation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+    });
+        
+    if (!response.ok) {
+        setSubmissionStatus('Failed to create a reservation')
+    } else {
+        setSubmissionStatus('Finished creating a reservation')
+    }
+};
+
 const ReserveNowButton: React.FC<ReserveNowProps> = ({
     name,
     checkInDate,
@@ -19,8 +55,10 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
     childrenGuests,
     roomCapacity,
 }) => {
+
+    const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    const [pets, setPets] = useState('no');
+    const [pets, setPets] = useState('No');
     const [submissionStatus, setSubmissionStatus] = useState('');
 
     const toggleModal = () => {
@@ -34,7 +72,7 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
 
         if (isOpen) {
             form.reset();
-            setPets('no');
+            setPets('No');
             setSubmissionStatus('');
         }
     };
@@ -52,6 +90,7 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
             totalGuests: 1,
             roomCapacity: roomCapacity,
             otherNotes: '',
+            pets: 'No',
         },
 
         validate: {
@@ -61,24 +100,25 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
             address: (value) => (value ? null : 'Address is required'),
             phone: (value) => (/^\d{11}$/.test(value) ? null : 'Contact number must be exactly 11 digits'),
-            
         },
     });
-
     
-    const handleSubmit = form.onSubmit((values) => {
+    const onSubmit = form.onSubmit((values) => {
+        
+        setIsLoading(true)
         const totalGuests = values.adultGuests + values.childrenGuests;
-    
         
         if (totalGuests > values.roomCapacity) {
             setSubmissionStatus(`[Error] Total guests cannot exceed the room capacity of ${values.roomCapacity}.`);
             return; 
+        } else {
+            handleSubmit(values, totalGuests, setSubmissionStatus, checkInDate, checkOutDate)
         }
-    
+        setIsLoading(false)
         
-        setSubmissionStatus(`Reservation successfully submitted.`);
-        form.reset();
+        setIsOpen(false)
     });
+
 
     return (
         <>
@@ -95,7 +135,7 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
                         <button className="absolute text-white top-2 left-2 hover:text-gray-700" onClick={toggleModal}>
                             &#x2715;
                         </button>
-                        <form onSubmit={handleSubmit} className="grid grid-cols-4 gap-4 text-sm">
+                        <form onSubmit={onSubmit} className="grid grid-cols-4 gap-4 text-sm">
 
                             {/* Check In and Check Out Dates */}
                             <div className="flex flex-col">
@@ -128,26 +168,11 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
                             <div className="flex flex-col">
                                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Pets</label>
                                 <div className="flex items-center">
-                                    <label className="mr-4">
-                                        <input
-                                            type="radio"
-                                            name="pets"
-                                            value="yes"
-                                            checked={pets === 'yes'}
-                                            onChange={() => setPets('yes')}
-                                        />
-                                        Yes
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="radio"
-                                            name="pets"
-                                            value="no"
-                                            checked={pets === 'no'}
-                                            onChange={() => setPets('no')}
-                                        />
-                                        No
-                                    </label>
+                                    <NativeSelect
+                                        value={pets}
+                                        onChange={(event) => setPets(event.currentTarget.value)}
+                                        data={['Yes', 'No']}
+                                    />
                                 </div>
                             </div>
 
@@ -177,20 +202,6 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
                                 <TextInput {...form.getInputProps('address')} placeholder="Address"/>
                             </div>
 
-                            <div className="flex flex-col col-span-2">
-                                <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Total Guests</label>
-                                <select
-                                    {...form.getInputProps('totalGuests')}
-                                    className="p-1 border border-gray-300 rounded"
-                                >
-                                    {[...Array(roomCapacity).keys()].map((num) => (
-                                        <option key={num} value={num + 1}>
-                                            {num + 1}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-
                             {/* Other Notes */}
                             <div className="flex flex-col col-span-2">
                                 <label className="font-serif text-left text-[#F2EFE8] mt-5 font-semibold">Other Notes</label>
@@ -202,7 +213,7 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
                             </div>
 
                             {/* Submit Button */}
-                            <div className="col-span-4"> <button type="submit" className="px-4 py-2 mt-4 w-full text-black bg-[#CBA989] rounded hover:bg-[#F2EFE8]" > 
+                            <div className="col-span-4"> <button type="submit" disabled={isLoading} className="px-4 py-2 mt-4 w-full text-black bg-[#CBA989] rounded hover:bg-[#F2EFE8]" > 
                             Submit Reservation </button> 
                             </div> 
                         </form>
