@@ -1,5 +1,6 @@
 import { Slideshow } from '../components/Slideshow';
 import '../components/styles.css';
+import { Link } from 'react-router-dom';
 
 const coverImage = './images/room-cover/Luxe.png';
 
@@ -28,7 +29,7 @@ const LuxeSuite = () => {
         </div>
         <div className="flex-1 text-left">
           <p className="text-lg md:text-xl">
-          <br /><br /><br /><br /><br />  The Luxe Suite is a spacious 1-bedroom suite located on the ground floor, designed for ultimate comfort and style. It features a queen-size bed and two king-size beds, providing ample space for families and small groups. Enjoy entertainment on a 60-inch Cignal TV and stay connected with your own internet router. The luxurious bathroom includes a relaxing bathtub and heater, while a walk-in closet and cozy sofa enhance your comfort. Step outside to your exclusive veranda, where breathtaking views of the mountains, sea, and pool create the perfect backdrop for your getaway.
+            <br /><br /><br /><br /><br />The Luxe Suite is a spacious 1-bedroom suite located on the ground floor, designed for ultimate comfort and style. It features a queen-size bed and two king-size beds, providing ample space for families and small groups. Enjoy entertainment on a 60-inch Cignal TV and stay connected with your own internet router. The luxurious bathroom includes a relaxing bathtub and heater, while a walk-in closet and cozy sofa enhance your comfort. Step outside to your exclusive veranda, where breathtaking views of the mountains, sea, and pool create the perfect backdrop for your getaway.
           </p>
         </div>
       </section>
@@ -80,12 +81,14 @@ const LuxeSuite = () => {
       </div>
 
       <div className="flex justify-center mt-6 mb-6">
-        <button 
-          className="bg-[#966732] text-white px-8 py-4 rounded text-lg font-semibold transition-transform duration-300 ease-in-out transform hover:bg-[#6b4c1e] hover:scale-105" 
-          aria-label="Book the Luxe Suite"
-        >
-          Book Now
-        </button>
+        <Link to="/reservations">
+          <button 
+            className="bg-[#966732] text-white px-8 py-4 rounded text-lg font-semibold transition-transform duration-300 ease-in-out transform hover:bg-[#6b4c1e] hover:scale-105" 
+            aria-label="Book the Luxe Suite"
+          >
+            Book Now
+          </button>
+        </Link>
       </div>
     </div>
   );
