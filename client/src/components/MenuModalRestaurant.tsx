@@ -14,7 +14,7 @@ export function RestaurantMenuModal() {
 	}
 
 	return ( <>
-        <Button variant="filled" color="#2F515B" radius="md" onClick={toggleModal}>See menu</Button>
+        <Button variant="filled" color="#2F515B" radius="md" onClick={toggleModal}>Restaurant menu</Button>
 
 		{isOpen && (
         <div className="fixed inset-0 w-full z-50 flex items-center justify-center bg-black bg-opacity-50">
