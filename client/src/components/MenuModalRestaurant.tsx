@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from "@mantine/core"
 
-export function MenuModal() {
+export function RestaurantMenuModal() {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggleModal = () => {

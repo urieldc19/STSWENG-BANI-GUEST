@@ -77,12 +77,26 @@ h6.header { font-size: 1.00em; }
 	display: flex;
 	flex-direction: row;
 }
-.menu-item > .item-name {
-	width: 75%;
+.menu-item > .item-name, h1.cafe > .item-name {
+	width: 70%;
 }
 .menu-item > .item-price {
 	width: 25%;
 	text-align: right;
+}
+.menu-item.cafe > .item-price, h1.cafe > .item-price {
+	width: 15%;
+}
+h1.cafe {
+	padding: 0rem 0rem 0rem 0.75rem;
+	display: flex;
+	flex-direction: row;
+}
+h1.cafe > div {
+	display: inline;
+}
+.menu-item.cafe > .item-price, h1.cafe > .item-price {
+	text-align: center;
 }
 
 .menu-item-multiline {
@@ -94,4 +108,9 @@ h6.header { font-size: 1.00em; }
 
 .menu-item-multiline > .menu-item {
 	padding: 0rem;
+}
+
+
+.center-important {
+	text-align: center !important;
 }

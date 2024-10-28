@@ -1,4 +1,5 @@
-import { MenuModal } from "../components/MenuModal";
+import { RestaurantMenuModal } from "../components/MenuModalRestaurant";
+import { CafeMenuModal } from "../components/MenuModalCafe";
 import { Button } from "@mantine/core"
 
 export function Restaurants() {
@@ -15,7 +16,7 @@ export function Restaurants() {
     <>
 		<div class="image-header">
 			<img src="../images/restaurants/slideshow1.png"></img>
-			<span>El Kapetan Cafe and Restaurant</span>
+			<span>el KAPe'TAN and Restaurant </span>
 		</div>
 
 		<div class="flex flex-col">
@@ -60,7 +61,8 @@ export function Restaurants() {
 						Indulge in our handcrafted coffee, specialty drinks, and light bites, all prepared with fresh, high-quality ingredients.
 					</div>
 					<div class="flex flex-row gap-4">
-            <MenuModal />
+            <RestaurantMenuModal />
+            <CafeMenuModal />
             <Button variant="outline" color="#2F515B" radius="md">Download PDF</Button>
 					</div>
 				</div>
