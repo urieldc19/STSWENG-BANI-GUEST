@@ -12,6 +12,7 @@ interface AvailableRoomProps {
     checkOutDate: string;
     adultGuests: number;
     childrenGuests: number;
+    roomCapacity: number;
 }
 
 const AvailableRoom: React.FC<AvailableRoomProps> = ({
@@ -23,6 +24,7 @@ const AvailableRoom: React.FC<AvailableRoomProps> = ({
     checkOutDate,
     adultGuests,
     childrenGuests,
+    roomCapacity,
 }) => {
     return (
         <div className="flex flex-col items-center bg-[#2F515B] p-4 rounded-lg shadow-lg m-2 w-[300px]">
@@ -37,7 +39,8 @@ const AvailableRoom: React.FC<AvailableRoomProps> = ({
                 checkInDate={checkInDate}
                 checkOutDate={checkOutDate}
                 adultGuests={adultGuests}
-                childrenGuests={childrenGuests}/>
+                childrenGuests={childrenGuests}
+                roomCapacity={roomCapacity}/>
         </div>
     );
 };

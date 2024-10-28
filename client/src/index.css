@@ -28,9 +28,23 @@
 	filter: brightness(0.6) saturate(1.5);
 }
 
+/* Restaurant footer gallery */
+.large-footer-gallery {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 0.66rem;
+	justify-content: center;
+}
+.large-footer-gallery > img {
+	border-radius: 0.2rem;
+	width: 28ex;
+	height: 16ex;
+	object-fit: cover;
+}
 
 /* Restaurant Menu */
-h1.menu-header, h2.menu_header, h3.menu-header, h4.menu-header, h5.menu-header, h6.menu_header {
+h1.menu-header, h2.menu-header, h3.menu-header, h4.menu-header, h5.menu-header, h6.menu-header {
 	width: 100%;
 	border: 2px solid #2F515B;
 	border-style: none none solid none;
@@ -41,17 +55,48 @@ h1.menu-header, h2.menu_header, h3.menu-header, h4.menu-header, h5.menu-header, 
 	margin: 0rem 0rem 0.75rem 0rem
 }
 
+h1.header, h2.header, h3.header, h4.header, h5.header, h6.header {
+	width: 100%;
+	border: 2px solid #2F515B;
+	border-style: none none solid none;
+	padding: 0em 0.5em;
+
+	color: #2F515B;
+	font-weight: bold;
+	margin: 0rem 0rem 0.75rem 0rem
+}
+h1.header { font-size: 2.25em; }
+h2.header { font-size: 2.00em; }
+h3.header { font-size: 1.75em; }
+h4.header { font-size: 1.50em; }
+h5.header { font-size: 1.25em; }
+h6.header { font-size: 1.00em; }
+
 .menu-item {
 	padding: 0rem 0rem 0rem 0.75rem;
 	display: flex;
 	flex-direction: row;
 }
-.menu-item > .item-name {
-	width: 75%;
+.menu-item > .item-name, h1.cafe > .item-name {
+	width: 70%;
 }
 .menu-item > .item-price {
 	width: 25%;
 	text-align: right;
+}
+.menu-item.cafe > .item-price, h1.cafe > .item-price {
+	width: 15%;
+}
+h1.cafe {
+	padding: 0rem 0rem 0rem 0.75rem;
+	display: flex;
+	flex-direction: row;
+}
+h1.cafe > div {
+	display: inline;
+}
+.menu-item.cafe > .item-price, h1.cafe > .item-price {
+	text-align: center;
 }
 
 .menu-item-multiline {
@@ -63,4 +108,9 @@ h1.menu-header, h2.menu_header, h3.menu-header, h4.menu-header, h5.menu-header, 
 
 .menu-item-multiline > .menu-item {
 	padding: 0rem;
+}
+
+
+.center-important {
+	text-align: center !important;
 }

@@ -13,6 +13,7 @@ const RoomAvailabilityBar = () => {
         price: string;
         description: React.ReactNode;
         isAvailable: boolean;
+        roomCapacity: number;
     }[]>([]);
     
     const [checkInDate, setCheckInDate] = useState('');
@@ -72,6 +73,7 @@ const RoomAvailabilityBar = () => {
                     </div>
                 ),
                 isAvailable: true,
+                roomCapacity: 8,
             },
             {
                 images: ['./images/reservations/room123.png', './images/reservations/room123(2).png'],
@@ -83,6 +85,7 @@ const RoomAvailabilityBar = () => {
                     </div>
                 ),
                 isAvailable: false,
+                roomCapacity: 48
             },
             {
                 images: ['./images/reservations/room123.png', './images/reservations/room123(2).png'],
@@ -94,6 +97,7 @@ const RoomAvailabilityBar = () => {
                     </div>
                 ),
                 isAvailable: true,
+                roomCapacity: 8,
             },
             {
                 images: ['./images/reservations/room456.png', './images/reservations/room456(2).png'],
@@ -105,6 +109,7 @@ const RoomAvailabilityBar = () => {
                     </div>
                 ),
                 isAvailable: false,
+                roomCapacity: 4,
             },
             {
                 images: ['./images/reservations/room456.png', './images/reservations/room456(2).png'],
@@ -116,6 +121,7 @@ const RoomAvailabilityBar = () => {
                     </div>
                 ),
                 isAvailable: true,
+                roomCapacity: 4,
             },
             {
                 images: ['./images/reservations/room456.png', './images/reservations/room456(2).png'],
@@ -127,6 +133,7 @@ const RoomAvailabilityBar = () => {
                     </div>
                 ),
                 isAvailable: false,
+                roomCapacity: 4,
             },
             {
                 images: ['./images/reservations/room7.png', './images/reservations/room7(2).png'],
@@ -138,6 +145,7 @@ const RoomAvailabilityBar = () => {
                     </div>
                 ),
                 isAvailable: true,
+                roomCapacity: 9,
             },
             {
                 images: ['./images/reservations/room8.png', './images/reservations/room8(2).png'],
@@ -149,6 +157,7 @@ const RoomAvailabilityBar = () => {
                     </div>
                 ),
                 isAvailable: true,
+                roomCapacity: 8,
             },
             {
                 images: ['./images/reservations/room9.png', './images/reservations/room9(2).png', './images/reservations/room9(3).png'],
@@ -160,6 +169,7 @@ const RoomAvailabilityBar = () => {
                     </div>
                 ),
                 isAvailable: true,
+                roomCapacity: 10,
             },
             {
                 images: ['./images/reservations/villa.png', './images/reservations/villa(2).png', './images/reservations/villa(3).png'],
@@ -171,6 +181,7 @@ const RoomAvailabilityBar = () => {
                     </div>
                 ),
                 isAvailable: true,
+                roomCapacity: 8,
             },
             {
                 images: ['./images/reservations/kubo.png', './images/reservations/kubo(2).png'],
@@ -182,6 +193,7 @@ const RoomAvailabilityBar = () => {
                     </div>
                 ),
                 isAvailable: true,
+                roomCapacity: 5,
             }
         ];
         setAvailableRooms(rooms);
@@ -278,6 +290,7 @@ const RoomAvailabilityBar = () => {
                                 name={room.name}
                                 price={room.price}
                                 description={room.description}
+                                roomCapacity={room.roomCapacity}
                                 checkInDate={checkInDate}
                                 checkOutDate={checkOutDate}
                                 adultGuests={parseInt(adultNumber)}
@@ -288,10 +301,13 @@ const RoomAvailabilityBar = () => {
                     )}
                 </div>
             );
-        };     
+        };
 
 
 export default RoomAvailabilityBar;
+
+
+
 
 
 

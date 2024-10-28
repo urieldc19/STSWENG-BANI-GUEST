@@ -1,429 +1,142 @@
-import { Slideshow } from "../components/Slideshow";
+import { RestaurantMenuModal } from "../components/MenuModalRestaurant";
+import { CafeMenuModal } from "../components/MenuModalCafe";
+import { Button } from "@mantine/core"
+import MenuPdf from "/files/BANI-Hidden Paradise Menu.pdf"
 
 export function Restaurants() {
 
   const images = [
     './images/restaurants/slideshow1.png',
+    './images/restaurants/slideshow2.png',
+    './images/restaurants/slideshow3.png',
+    './images/restaurants/slideshow4.png',
+    './images/restaurants/slideshow5.png',
   ];
 
   return (
     <>
-      <div className="flex flex-col m-6 gap-4">
-        <div className="flex flex-col md:flex-row w-full">
-          <div className="w-full md:w-9/12">
+		<div class="image-header">
+			<img src="../images/restaurants/slideshow1.png"></img>
+			<span>el KAPe'TAN and Restaurant </span>
+		</div>
 
-            <h1 className="menu-header">Appetizers</h1>
-            <div className="menu-item">
-              <div className="item-name">Club Paradise Sandwich <small>w/ drinks</small></div>
-              <div className="item-price">₱450</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Hidden Dynamite</div>
-              <div className="item-price">₱50</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Calamares</div>
-              <div className="item-price">₱300</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Onion Rings</div>
-              <div className="item-price">₱250</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Crispy Kangkong</div>
-              <div className="item-price">₱160</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">French Fries</div>
-              <div className="item-price">₱180</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Cheese Stick</div>
-              <div className="item-price">₱180</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Nachos <small>w/ dip</small></div>
-              <div className="item-price">₱300</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Kilawin</div>
-              <div className="item-price">₱350</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">French Fries</div>
-              <div className="item-price">₱400</div>
-            </div>
-          </div>
+		<div class="flex flex-col">
+			<div>
+				<div class="flex flex-col gap-2 px-24 py-8">
+					<h1 class="header">Fresh Delicacy</h1>
+					<div> From all around Pangasinan </div>
+					<div>
+						A delicacy is usually a rare or expensive food item that is considered highly desirable, sophisticated or peculiarly distinctive, within a given culture.
+						Irrespective of local preferences, such a label is typically pervasive throughout a region.
+					</div>
+					<div class="flex flex-row gap-4 w-full">
+						<img src="../images/restaurants/food/delicacy1.png" class="w-4/12 object-cover rounded-lg"></img>
+						<img src="../images/restaurants/food/delicacy2.png" class="w-4/12 object-cover rounded-lg"></img>
+						<img src="../images/restaurants/food/delicacy3.png" class="w-4/12 object-cover rounded-lg"></img>
+					</div>
+				</div>
+			</div>
 
-          <div className="w-full md:w-3/12 py-4 md:py-0 md:px-4">
-            <img src="./images/restaurants/slideshow2.png" className="w-full h-full object-cover rounded-lg" />
-          </div>
-        </div>
-        <div className="flex flex-col md:flex-row w-full gap-8">
-          <div className="flex flex-col md:w-6/12 gap-4">
+			<div class="px-24 py-8 flex flex-row gap-8 bg-slate-200">
+				<div class="w-3/12">
+					<img src="../images/restaurants/chef.avif" class="object-cover w-full h-full rounded-lg max-h-96"></img>
+				</div>
+				<div class="w-9/12 flex flex-col justify-center gap-2">
+					<h1 class="header">The Best Chef</h1>
+					<div> For food made with love and passion </div>
+					<div>
+						A cuisine is a style of cooking characterized by distinctive ingredients, techniques and dishes, and usually associated with a specific culture or geographic region.
+						Regional food preparation traditions, customs and ingredients often combine to create dishes unique to a particular region.
+						A cuisine is primarily influenced by the ingredients that are available locally or through trade, they can even be made into distinct ingredients themselves when they become popular within a region, take for example Japanese rice in Japanese cuisine and New Mexico chile in New Mexican cuisine.
+						And here Philippines cuisine.
+					</div>
+				</div>
+			</div>
 
-            <div className="flex flex-col w-full">
-              <h1 className="menu-header">Paradise Delight</h1>
-              <div className="menu-item">
-                <div className="item-name">California Maki</div>
-                <div className="item-price">₱500</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Paradise Volcano Maki</div>
-                <div className="item-price">₱500</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Sashimi</div>
-                <div className="item-price">₱350</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Shrimp Tempura</div>
-                <div className="item-price">₱550</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Vegetable Tempura</div>
-                <div className="item-price">₱450</div>
-              </div>
-            </div>
+			<div class="px-24 py-8 flex flex-row gap-8">
+				<div class="w-7/12 flex flex-col gap-2 justify-center">
+					<h1 class="header">Menu</h1>
+					<div>
+						Welcome to El Kapetan at Hidden Paradise Beach Resort, Bani, where we combine the best of tropical flavors with café classics to create a truly unique experience.
+						Our menu is designed to offer something for every palate, whether you're looking for a refreshing iced beverage by the beach or a cozy, warm brew to start your day.
+						Indulge in our handcrafted coffee, specialty drinks, and light bites, all prepared with fresh, high-quality ingredients.
+					</div>
+					<div class="flex flex-row gap-4">
+            <RestaurantMenuModal />
+            <CafeMenuModal />
+			<a href={MenuPdf} download="BANI-Hidden Paradise Menu">
+            	<Button variant="outline" color="#2F515B" radius="md">Download PDF</Button>
+			</a>
+					</div>
+				</div>
+				<div class="w-5/12 flex flex-col gap-y-4 justify-center">
+					<div class="flex flex-row gap-x-4 justify-center h-32">
+						<img src="../images/restaurants/food/menu1.png" class="object-cover w-6/12 max-w-64 rounded-lg"></img>
+						<img src="../images/restaurants/food/menu2.png" class="object-cover w-6/12 max-w-64 rounded-lg"></img>
+					</div>
+					<div class="flex flex-row gap-x-4 justify-center h-32">
+						<img src="../images/restaurants/food/menu3.png" class="object-cover w-6/12 max-w-64 rounded-lg"></img>
+						<img src="../images/restaurants/food/menu4.png" class="object-cover w-6/12 max-w-64 rounded-lg"></img>
+					</div>
+				</div>
+			</div>
 
-            <div className="flex flex-col w-full">
-              <h1 className="menu-header">Seafood</h1>
-              <div className="menu-item">
-                <div className="item-name">Sweet and Sour Fish</div>
-                <div className="item-price">₱500</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Fusion Buttered Shrimp</div>
-                <div className="item-price">₱450</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Sinigang na Hipon</div>
-                <div className="item-price">₱500</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Halabos na Hipon</div>
-                <div className="item-price">₱450</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Ginataang Alimango</div>
-                <div className="item-price">₱750</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Fried Bangus</div>
-                <div className="item-price">₱300</div>
-              </div>
-            </div>
+			<div class="px-24 py-8 flex flex-row gap-8 items-center bg-orange-50">
+				<div class="w-5/12 flex flex-col gap-y-4 justify-center">
+					<div class="flex flex-row gap-x-4 justify-center h-32">
+						<img src="../images/restaurants/food/reservation1.png" class="object-cover w-6/12 max-w-64 rounded-lg"></img>
+						<img src="../images/restaurants/food/reservation2.png" class="object-cover w-6/12 max-w-64 rounded-lg"></img>
+					</div>
+					<div class="flex flex-row gap-x-4 justify-center h-32">
+						<img src="../images/restaurants/food/reservation3.png" class="object-cover w-6/12 max-w-64 rounded-lg"></img>
+						<img src="../images/restaurants/food/reservation4.png" class="object-cover w-6/12 max-w-64 rounded-lg"></img>
+					</div>
+				</div>
+				<div class="w-7/12 flex flex-col gap-2">
+					<h1 class="header">Reservation</h1>
+					<div>
+					Looking to enjoy a meal or coffee with a stunning view of the beach at Hidden Paradise Beach Resort, Bani?
+					Reserve your spot at El Kapetan Café & Restaurant today!
+					</div>
+					<div class="flex flex-row gap-4">
+            <Button component="a" variant="outline" color="#2F515B" radius="md" href="./reservations">Reserve now</Button>
+					</div>
+				</div>
+			</div>
 
-            <div className="flex flex-col w-full">
-              <h1 className="menu-header">Sizling Rice Meals <small>(solo)</small></h1>
-              <div className="menu-item">
-                <div className="item-name">Chicken Inasal</div>
-                <div className="item-price">₱250</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Porkchop</div>
-                <div className="item-price">₱250</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Tapa <small>w/ egg</small></div>
-                <div className="item-price">₱250</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Tocino <small>w/ egg</small></div>
-                <div className="item-price">₱250</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Hotdog <small>w/ egg</small></div>
-                <div className="item-price">₱200</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Longanisa <small>w/ egg</small></div>
-                <div className="item-price">₱200</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Sizzling Sisig</div>
-                <div className="item-price">₱250</div>
-              </div>
-            </div>
+			<div class="px-24 py-8 flex flex-col gap-4">
+				<h1 class="header">Our Food</h1>
+				<div>
+					Savor the taste of paradise with every sip—crafted with care and the finest beans, surrounded by the serene beauty of the sea at El Kapetan, Bani Hidden Paradise Beach Resort.
+					Indulge in authentic cooked meals from Pangasinan, rich in flavors that tell a story of tradition and love.
+					Let the flavors transport you to a tropical escape, where every cup and bite is a moment of pure bliss.
+				</div>
+				<div class="bg-orange-100 p-4 rounded-lg large-footer-gallery">
+						<img src="../images/restaurants/food/gallery1.png"></img>
+						<img src="../images/restaurants/food/gallery2.png"></img>
+						<img src="../images/restaurants/food/gallery3.png"></img>
+						<img src="../images/restaurants/food/gallery4.png"></img>
+						<img src="../images/restaurants/food/gallery5.png"></img>
+						<img src="../images/restaurants/food/gallery6.png"></img>
+						<img src="../images/restaurants/food/gallery7.png"></img>
+						<img src="../images/restaurants/food/gallery8.png"></img>
+						<img src="../images/restaurants/food/gallery9.png"></img>
+						<img src="../images/restaurants/food/gallery10.png"></img>
+						<img src="../images/restaurants/food/gallery11.png"></img>
+						<img src="../images/restaurants/food/gallery12.png"></img>
+						<img src="../images/restaurants/food/gallery13.png"></img>
+						<img src="../images/restaurants/food/gallery14.png"></img>
+						<img src="../images/restaurants/food/gallery15.png"></img>
+						<img src="../images/restaurants/food/gallery16.png"></img>
+						<img src="../images/restaurants/food/gallery17.png"></img>
+						<img src="../images/restaurants/food/gallery18.png"></img>
+						<img src="../images/restaurants/food/gallery19.png"></img>
+						<img src="../images/restaurants/food/gallery20.png"></img>
+						<img src="../images/restaurants/food/gallery21.png"></img>
+				</div>
+			</div>
 
-            <div className="flex flex-col w-full">
-              <h1 className="menu-header">Extra Rice</h1>
-              <div className="menu-item">
-                <div className="item-name">Plain Rice</div>
-                <div className="item-price">₱25 <small>per cup</small></div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Garlic Rice</div>
-                <div className="item-price">₱35 <small>per cup</small></div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Seafood Rice</div>
-                <div className="item-price">₱350 <small>per platter</small></div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Egg Fried Rice</div>
-                <div className="item-price">₱250 <small>per platter</small></div>
-              </div>
-            </div>
-            <img src="./images/restaurants/slideshow3.png" className="w-full h-full object-cover rounded-lg" />
-
-          </div>
-          <div className="flex flex-col md:w-6/12 gap-4">
-
-            <div className="flex flex-col w-full">
-              <h1 className="menu-header">Salad</h1>
-              <div className="menu-item">
-                <div className="item-name">Toasted Paradise Salad</div>
-                <div className="item-price">₱400</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Kani Salad</div>
-                <div className="item-price">₱400</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Chef Salad</div>
-                <div className="item-price">₱400</div>
-              </div>
-            </div>
-
-            <div className="flex flex-col w-full">
-              <h1 className="menu-header">Pasta and Noodles</h1>
-              <div className="menu-item">
-                <div className="item-name">Pancit Bihon</div>
-                <div className="item-price">₱400</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Pancit Canton</div>
-                <div className="item-price">₱400</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Traditional Spaghetti</div>
-                <div className="item-price">₱450</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Special Carbonara</div>
-                <div className="item-price">₱450</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Lomi</div>
-                <div className="item-price">₱300</div>
-              </div>
-            </div>
-
-            <div className="flex flex-col w-full">
-              <h1 className="menu-header">Beef</h1>
-              <div className="menu-item">
-                <div className="item-name">Beef Steak</div>
-                <div className="item-price">₱500</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Beef Nilaga</div>
-                <div className="item-price">₱500</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Bulalo</div>
-                <div className="item-price">₱600</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Pigar-Pigar</div>
-                <div className="item-price">₱500</div>
-              </div>
-            </div>
-
-            <div className="flex flex-col w-full">
-              <h1 className="menu-header">Pork</h1>
-              <div className="menu-item">
-                <div className="item-name">Menudo</div>
-                <div className="item-price">₱400</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Crispy Pata</div>
-                <div className="item-price">₱700</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Crispy Kare-Kare</div>
-                <div className="item-price">₱600</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Pork Steak</div>
-                <div className="item-price">₱400</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Pork Sinigang</div>
-                <div className="item-price">₱450</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Patatim</div>
-                <div className="item-price">₱700</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Bicol Express</div>
-                <div className="item-price">₱400</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Liempo Inasal</div>
-                <div className="item-price">₱400</div>
-              </div>
-            </div>
-
-            <div className="flex flex-col w-full">
-              <h1 className="menu-header">Chicken</h1>
-              <div className="menu-item">
-                <div className="item-name">Native Chicken Binacol</div>
-                <div className="item-price">₱700</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Afritada</div>
-                <div className="item-price">₱400</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Chicken Inasal</div>
-                <div className="item-price">₱400</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Fried Chicken <small>(whole)</small></div>
-                <div className="item-price">₱450</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Fried Chicken <small>(half)</small></div>
-                <div className="item-price">₱350</div>
-              </div>
-            </div>
-
-            <div className="flex flex-col w-full">
-              <h1 className="menu-header">Vegetable</h1>
-              <div className="menu-item">
-                <div className="item-name">Pinakbet <small>w/ Bagnet</small></div>
-                <div className="item-price">₱450</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Chopsuey</div>
-                <div className="item-price">₱400</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Ginataang Gulay</div>
-                <div className="item-price">₱400</div>
-              </div>
-              <div className="menu-item">
-                <div className="item-name">Buttered Veggies</div>
-                <div className="item-price">₱400</div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        
-        <div className="flex flex-col md:flex-row w-full gap-8">
-          <div className="flex flex-col md:w-6/12">
-            <h1 className="menu-header">Beverages</h1>
-            <div className="menu-item">
-              <div className="item-name">Lemonade Pitcher</div>
-              <div className="item-price">₱180</div>
-            </div>
-            <div className="menu-item-multiline">
-              <div className="menu-item">
-                <div className="item-name">Glass</div>
-                <div className="item-price">₱65</div>
-              </div>
-              <div className="menu-item text-xs">
-                <div className="item-name">Flavors: Cucumber Lemonade, House Blend, Blue Lemonade</div>
-              </div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Pineapple Juice in Can</div>
-              <div className="item-price">₱80</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Brewed Coffee</div>
-              <div className="item-price">₱50</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Hot Tea</div>
-              <div className="item-price">₱50</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">3 in 1 Coffee</div>
-              <div className="item-price">₱35</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Soft Drinks <small>1 L</small></div>
-              <div className="item-price">₱120</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Bottled Water <small>500 mL</small></div>
-              <div className="item-price">₱50</div>
-            </div>
-          </div>
-          
-          <div className="flex flex-col md:w-6/12">
-          <h1 className="menu-header">Hard Drinks / Beers</h1>
-            <div className="menu-item">
-              <div className="item-name">Jack Daniel's <small>1 L</small></div>
-              <div className="item-price">₱1,900</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Red Label <small>1 L</small></div>
-              <div className="item-price">₱1,800</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Black Label <small>1 L</small></div>
-              <div className="item-price">₱2,000</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Jose Cuervo</div>
-              <div className="item-price">₱2,000</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Ginebra 2x2</div>
-              <div className="item-price">₱90</div>
-            </div>
-            <div className="menu-item">
-              <div className="item-name">Alfonso Light <small>1L</small></div>
-              <div className="item-price">₱420</div>
-            </div>
-            <div className="menu-item-multiline">
-              <div className="menu-item">
-                <div className="item-name">Redhorse Stallion</div>
-              </div>
-              <div className="menu-item text-xs">
-                <div className="item-name">Bucket</div>
-                <div className="item-price">₱500</div>
-              </div>
-              <div className="menu-item text-xs">
-                <div className="item-name">Bottle</div>
-                <div className="item-price">₱90</div>
-              </div>
-            </div>
-            <div className="menu-item-multiline">
-              <div className="menu-item">
-                <div className="item-name">San Mig Light/Apple</div>
-              </div>
-              <div className="menu-item text-xs">
-                <div className="item-name">Bucket</div>
-                <div className="item-price">₱500</div>
-              </div>
-              <div className="menu-item text-xs">
-                <div className="item-name">Bottle</div>
-                <div className="item-price">₱90</div>
-              </div>
-            </div>
-            <div className="menu-item-multiline">
-              <div className="menu-item">
-                <div className="item-name">San Mig Pale Pilsen</div>
-              </div>
-              <div className="menu-item text-xs">
-                <div className="item-name">Bucket</div>
-                <div className="item-price">₱500</div>
-              </div>
-              <div className="menu-item text-xs">
-                <div className="item-name">Bottle</div>
-                <div className="item-price">₱90</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+		</div>
     </>
   );
 }
