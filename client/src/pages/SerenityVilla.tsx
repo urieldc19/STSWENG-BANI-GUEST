@@ -1,5 +1,6 @@
 import { Slideshow } from '../components/Slideshow';
 import '../components/styles.css';
+import { Link } from 'react-router-dom';
 
 const coverImage = './images/room-cover/Serenity.png';
 
@@ -28,7 +29,7 @@ const SerenityVilla = () => {
         </div>
         <div className="flex-1 text-left">
           <p className="text-lg md:text-xl">
-          <br /><br /><br /><br /><br />  Indulge in the ultimate getaway at the Serenity Villa, a beautifully appointed space designed for comfort and relaxation. Located on the ground floor, this spacious suite offers stunning views of the mountains, sea, and pool, providing a serene backdrop for your stay. Perfect for families or groups, the Serenity Villa creates an inviting atmosphere where cherished memories can unfold. With separate access and a private veranda, you can enjoy the fresh air and scenic vistas, making it an ideal choice for those seeking both luxury and tranquility in their beach retreat.
+            <br /><br /><br /><br /><br />Indulge in the ultimate getaway at the Serenity Villa, a beautifully appointed space designed for comfort and relaxation. Located on the ground floor, this spacious suite offers stunning views of the mountains, sea, and pool, providing a serene backdrop for your stay. Perfect for families or groups, the Serenity Villa creates an inviting atmosphere where cherished memories can unfold. With separate access and a private veranda, you can enjoy the fresh air and scenic vistas, making it an ideal choice for those seeking both luxury and tranquility in their beach retreat.
           </p>
         </div>
       </section>
@@ -75,12 +76,14 @@ const SerenityVilla = () => {
       </div>
 
       <div className="flex justify-center mt-6 mb-6">
-        <button 
-          className="bg-[#966732] text-white px-8 py-4 rounded text-lg font-semibold transition-transform duration-300 ease-in-out transform hover:bg-[#6b4c1e] hover:scale-105" 
-          aria-label="Book the Serenity Villa"
-        >
-          Book Now
-        </button>
+        <Link to="/reservations">
+          <button 
+            className="bg-[#966732] text-white px-8 py-4 rounded text-lg font-semibold transition-transform duration-300 ease-in-out transform hover:bg-[#6b4c1e] hover:scale-105" 
+            aria-label="Book the Serenity Villa"
+          >
+            Book Now
+          </button>
+        </Link>
       </div>
     </div>
   );
