@@ -1,6 +1,7 @@
 import { RestaurantMenuModal } from "../components/MenuModalRestaurant";
 import { CafeMenuModal } from "../components/MenuModalCafe";
 import { Button } from "@mantine/core"
+import MenuPdf from "/files/BANI-Hidden Paradise Menu.pdf"
 
 export function Restaurants() {
 
@@ -63,7 +64,9 @@ export function Restaurants() {
 					<div class="flex flex-row gap-4">
             <RestaurantMenuModal />
             <CafeMenuModal />
-            <Button variant="outline" color="#2F515B" radius="md">Download PDF</Button>
+			<a href={MenuPdf} download="BANI-Hidden Paradise Menu">
+            	<Button variant="outline" color="#2F515B" radius="md">Download PDF</Button>
+			</a>
 					</div>
 				</div>
 				<div class="w-5/12 flex flex-col gap-y-4 justify-center">
