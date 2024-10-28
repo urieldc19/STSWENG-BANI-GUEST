@@ -1,5 +1,7 @@
 import { Slideshow } from '../components/Slideshow';
 import '../components/styles.css';
+import { Link } from 'react-router-dom';
+
 
 const coverImage = './images/room-cover/Scenic.png';
 
@@ -77,10 +79,12 @@ const ScenicBalconySuite = () => {
       </div>
 
       <div className="flex justify-center mt-6 mb-6">
-        <button className="bg-[#966732] text-white px-8 py-4 rounded text-lg font-semibold transition-transform duration-300 ease-in-out transform hover:bg-[#6b4c1e] hover:scale-105">
-          Book Now
-        </button>
-      </div>
+  <Link to="/reservations">
+    <button className="bg-[#966732] text-white px-8 py-4 rounded text-lg font-semibold transition-transform duration-300 ease-in-out transform hover:bg-[#6b4c1e] hover:scale-105">
+      Book Now
+    </button>
+  </Link>
+</div>
     </div>
   );
 };
