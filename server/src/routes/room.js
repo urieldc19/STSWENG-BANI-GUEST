@@ -1,8 +1,8 @@
 const express = require("express");
 
 const router = express.Router();
-const {getAvailableRooms} = require('../controllers/room.js')
+const {getBookedRooms} = require('../controllers/room.js')
 
-router.get("/available", getAvailableRooms)
+router.get("/booked", getBookedRooms)
 
 module.exports = router

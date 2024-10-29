@@ -1,20 +1,17 @@
 const { Room, Reservation } = require('../models/models.js');
 
-const getAvailableRooms = async (req, res) => {
+const getBookedRooms = async (req, res) => {
 
     try {
 
-        const reservedRooms = await Reservation.find().select('roomId');
-        const reservedRoomIds = reservedRooms.map(reservation => reservation.roomId);
+        const reservations = await Reservation.find({}, 'roomId checkInDate checkOutDate -_id');
+
         
-        const availableRooms = await Room.find({ roomId: { $nin: reservedRoomIds } });
-        const availableRoomIds = availableRooms.map(reservation => reservation.roomId);
-        
-        return availableRoomIds;
+        return reservedRoomIds;
 
     } catch (error) {
         res.status(500).json({message: "Failed to get avaiable rooms"})
     }
 }
 
-module.exports = {getAvailableRooms}
+module.exports = {getBookedRooms}
