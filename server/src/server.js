@@ -13,9 +13,11 @@ app.use(express.json())
 app.use(bodyParser.json());
 
 const reservation = require("./routes/reservation.js")
+const room = require("./routes/room.js")
 
 app.use(cors())
 
 app.use("/api", reservation)
+app.use("/room", room)
 
 module.exports = {app, PORT}
