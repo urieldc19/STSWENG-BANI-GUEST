@@ -1,17 +1,35 @@
 const { Room, Reservation } = require('../models/models.js');
 
-const getBookedRooms = async (req, res) => {
+const getAvailableRooms = async (req, res) => {
+
+    const { checkInDate, checkOutDate } = req.body
+
+    if (!checkInDate || !checkOutDate) {
+        return res.status(400).json({ message: 'Check-in and check-out dates are required.' })
+    }
 
     try {
+        const occupiedReservations = await Reservation.find({
+            $or: [
+                { checkInDate: { $lt: new Date(checkOutDate), $gte: new Date(checkInDate) } },
+                { checkOutDate: { $gt: new Date(checkInDate), $lte: new Date(checkOutDate) } }
+            ]
+        }).select('roomId -_id');
 
-        const reservations = await Reservation.find({}, 'roomId checkInDate checkOutDate -_id');
+        const occupiedRoomIds = new Set(occupiedReservations.map(res => res.roomId));
 
-        
-        return reservations;
+        const allRooms = await Room.find().select('roomId -_id');
+
+        const roomAvailability = allRooms.map(room => ({
+            roomId: room.roomId,
+            isAvailable: !occupiedRoomIds.has(room.roomId)
+        }));
+
+        return res.json(roomAvailability);
 
     } catch (error) {
-        res.status(500).json({message: "Failed to get avaiable rooms"})
+        console.error(error)
     }
 }
 
-module.exports = {getBookedRooms}
+module.exports = {getAvailableRooms}

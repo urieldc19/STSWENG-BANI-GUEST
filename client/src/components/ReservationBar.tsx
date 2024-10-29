@@ -61,6 +61,8 @@ const RoomAvailabilityBar = () => {
         if (!validateDates()) {
             return; // Stop if validation fails
         }
+
+        
         
         const rooms = [
             {
