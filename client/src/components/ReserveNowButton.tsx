@@ -42,6 +42,29 @@ const handleSubmit = async (values, totalGuests, setSubmissionStatus, checkInDat
     if (!response.ok) {
         setSubmissionStatus('Failed to create a reservation')
     } else {
+        const response = await fetch('/api/sendConfirmationEmail', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                checkInDate: checkInDate, 
+                checkOutDate: checkOutDate, 
+                numberOfAdults: values.childrenGuests, 
+                numberOfChildren: values.adultGuests, 
+                numberOfGuests: totalGuests, 
+                pets: values.pets,  
+                otherNotes: values.otherNotes,
+                firstName: values.firstName, 
+                lastName: values.lastName, 
+                contactNumber: values.phone,
+                email: values.email,
+                address: values.address
+            }),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to create a confirmation email');
+        }
         setSubmissionStatus('Finished creating a reservation')
     }
 };
