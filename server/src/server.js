@@ -3,13 +3,19 @@ const bodyParser = require("body-parser");
 
 const app = express()
 const PORT = 3000
+const cors = require('cors');
+const dotenv = require ('dotenv')
+
+dotenv.config()
 
 app.use(express.static("public"));
 app.use(express.json())
 app.use(bodyParser.json());
 
-module.exports = {app, PORT}
-
 const reservation = require("./routes/reservation.js")
 
+app.use(cors())
+
 app.use("/api", reservation)
+
+module.exports = {app, PORT}

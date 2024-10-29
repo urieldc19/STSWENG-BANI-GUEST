@@ -6,6 +6,6 @@ const {sendConfirmationEmail} = require('../controllers/reservation.js')
 
 router.post("/", createReservation)
 router.post('/sendConfirmationEmail', sendConfirmationEmail)
-router.get('/test-get', () => {console.log("hello")})
+router.post("/createReservation", createReservation)
 
 module.exports = router
