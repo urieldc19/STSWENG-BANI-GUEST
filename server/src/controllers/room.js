@@ -7,7 +7,7 @@ const getBookedRooms = async (req, res) => {
         const reservations = await Reservation.find({}, 'roomId checkInDate checkOutDate -_id');
 
         
-        return reservedRoomIds;
+        return reservations;
 
     } catch (error) {
         res.status(500).json({message: "Failed to get avaiable rooms"})
