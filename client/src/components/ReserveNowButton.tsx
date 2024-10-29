@@ -30,8 +30,7 @@ const handleSubmit = async (values, totalGuests, setSubmissionStatus, checkInDat
         roomId: values.roomPreference,
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
-    }
-    
+    }    
     const response = await fetch('/api/createReservation', {
         method: 'POST',
         headers: {
