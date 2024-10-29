@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 const coverImage = './images/room-cover/Serenity.png';
 
 const slideshowImages = [
-  './images/serenity-villa/serenity-1.png',
-  './images/serenity-villa/serenity-2.png',
-  './images/serenity-villa/serenity-3.png',
-  './images/serenity-villa/serenity-4.png',
+  './images/serenity/serenity-1.png',
+  './images/serenity/serenity-2.png',
+  './images/serenity/serenity-3.png',
+  './images/serenity/serenity-4.png',
 ];
 
 const SerenityVilla = () => {
