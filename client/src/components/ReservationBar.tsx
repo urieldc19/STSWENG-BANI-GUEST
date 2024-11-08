@@ -1,9 +1,8 @@
 {/* install first: npm install react-datepicker and npm install --save @types/react-datepicker */}
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AvailableRoom from "../components/AvailableRooms";
 import { NativeSelect } from '@mantine/core';
-
 
 const RoomAvailabilityBar = () => {
     
@@ -54,15 +53,14 @@ const RoomAvailabilityBar = () => {
         return true;
     };
 
-
+    
 
     // Sample only (needs backend for isAvailable and actual images for the rooms)
-    const checkAvailability = () => {
+    const checkAvailability = async () => {
+
         if (!validateDates()) {
             return; // Stop if validation fails
         }
-
-        
         
         const rooms = [
             {
@@ -198,7 +196,34 @@ const RoomAvailabilityBar = () => {
                 roomCapacity: 5,
             }
         ];
-        setAvailableRooms(rooms);
+
+            fetch(`/api/room/getavailable?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`)
+            .then(response => response.json())
+            .then(data => {
+                // Combine the data with the rooms array
+                const updatedRooms = rooms.map(room => {
+                    // Find the matching room in the data array
+                    const availability = data.find(item => item.name === room.name);
+                    
+                    // If the room exists in the data array, update its availability status
+                    if (availability) {
+                        return {
+                            ...room,
+                            isAvailable: availability.isAvailable
+                        };
+                    }
+
+                    // If no matching room is found, return the room as it is (this case shouldn't happen)
+                    return room;
+                });
+
+                console.log(updatedRooms);  // Log the updated rooms array
+
+                setAvailableRooms(updatedRooms);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
     };
 
     const filterAvailableRooms = () => {

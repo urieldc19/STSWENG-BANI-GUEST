@@ -2,7 +2,7 @@ const { Room, Reservation } = require('../models/models.js');
 
 const getAvailableRooms = async (req, res) => {
 
-    const { checkInDate, checkOutDate } = req.body
+    const { checkInDate, checkOutDate } = req.query
 
     if (!checkInDate || !checkOutDate) {
         return res.status(400).json({ message: 'Check-in and check-out dates are required.' })
@@ -21,7 +21,7 @@ const getAvailableRooms = async (req, res) => {
         const allRooms = await Room.find().select('roomId -_id');
 
         const roomAvailability = allRooms.map(room => ({
-            roomId: room.roomId,
+            name: room.roomId,
             isAvailable: !occupiedRoomIds.has(room.roomId)
         }));
 
