@@ -1,8 +1,8 @@
 {/* install first: npm install react-datepicker and npm install --save @types/react-datepicker */}
 
-import { useEffect, useState } from 'react';
-import AvailableRoom from "../components/AvailableRooms";
 import { NativeSelect } from '@mantine/core';
+import { useState } from 'react';
+import AvailableRoom from "../components/AvailableRooms";
 
 const RoomAvailabilityBar = () => {
     
@@ -20,7 +20,8 @@ const RoomAvailabilityBar = () => {
     const [adultNumber, setAdultNumber] = useState('1');
     const [childrenNumber, setChildrenNumber] = useState('0');
     const [validationErrors, setValidationErrors] = useState<{ checkIn?: string; checkOut?: string }>({});
-
+    const [isValidationComplete, setIsValidationComplete] = useState(false);
+    
     const validateDates = () => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -45,11 +46,12 @@ const RoomAvailabilityBar = () => {
         
         if (Object.keys(errors).length > 0) {
             setValidationErrors(errors);
+            setIsValidationComplete(true);
             return false;
         }
 
-        
         setValidationErrors({});
+        setIsValidationComplete(true);
         return true;
     };
 
@@ -61,6 +63,7 @@ const RoomAvailabilityBar = () => {
         if (!validateDates()) {
             return; // Stop if validation fails
         }
+        const totalGuests = parseInt(adultNumber) + parseInt(childrenNumber);
         
         const rooms = [
             {
@@ -84,8 +87,8 @@ const RoomAvailabilityBar = () => {
                         <p>Create unforgettable memories in our spacious resort room, perfect for up to 8 guests. Your adventure starts here!</p>
                     </div>
                 ),
-                isAvailable: false,
-                roomCapacity: 48
+                isAvailable: true,
+                roomCapacity: 8,
             },
             {
                 images: ['./images/reservations/room123.png', './images/reservations/room123(2).png'],
@@ -108,7 +111,7 @@ const RoomAvailabilityBar = () => {
                         <p>Find your paradise for two! Our elegantly designed room offers the perfect sanctuary for couples.</p>
                     </div>
                 ),
-                isAvailable: false,
+                isAvailable: true,
                 roomCapacity: 4,
             },
             {
@@ -132,7 +135,7 @@ const RoomAvailabilityBar = () => {
                         <p>Romantic retreats await! Our cozy room for two is the perfect getaway for couples looking to relax and reconnect.</p>
                     </div>
                 ),
-                isAvailable: false,
+                isAvailable: true,
                 roomCapacity: 4,
             },
             {
@@ -197,37 +200,38 @@ const RoomAvailabilityBar = () => {
             }
         ];
 
-            fetch(`/api/room/getavailable?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`)
-            .then(response => response.json())
-            .then(data => {
-                // Combine the data with the rooms array
-                const updatedRooms = rooms.map(room => {
-                    // Find the matching room in the data array
-                    const availability = data.find(item => item.name === room.name);
-                    
-                    // If the room exists in the data array, update its availability status
-                    if (availability) {
-                        return {
-                            ...room,
-                            isAvailable: availability.isAvailable
-                        };
-                    }
+        // Filter rooms to only include those that are currently available
+        // and have a capacity equal to or greater than the total number of guests
+        let filteredRooms = rooms.filter(
+            (room) => room.isAvailable && room.roomCapacity >= totalGuests
+        );
 
-                    // If no matching room is found, return the room as it is (this case shouldn't happen)
-                    return room;
-                });
+        try {
+            const response = await fetch(
+                `/api/room/getavailable?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+            );
+            const data = await response.json();
 
-                console.log(updatedRooms);  // Log the updated rooms array
-
-                setAvailableRooms(updatedRooms);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
+            filteredRooms = filteredRooms.map(room => {
+                // Combine the data fetched from the API with the filteredRooms array
+                // For each room in filteredRooms, find the corresponding room in the data array
+                // and update its 'isAvailable' status based on the fetched data
+                // If the room exists in the data array, update 'isAvailable' to match
+                // otherwise, keep the original 'isAvailable' status of the room
+                const availability = data.find(item => item.name === room.name);
+                return {
+                    ...room,
+                    isAvailable: availability ? availability.isAvailable : room.isAvailable
+                };
             });
-    };
 
-    const filterAvailableRooms = () => {
-        return availableRooms.filter(room => room.isAvailable);
+            // Filter only available rooms to display
+            filteredRooms = filteredRooms.filter(room => room.isAvailable);
+            setAvailableRooms(filteredRooms);
+    
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     };
 
     
@@ -305,27 +309,31 @@ const RoomAvailabilityBar = () => {
                         </button>
                     </div>
                 </div>
-
-                {/* Available Rooms */}
-                {filterAvailableRooms().length > 0 && (
-                    <div className="flex flex-wrap justify-center mt-6">
-                        <h3 className="w-full mb-4 font-serif text-xl font-semibold text-center">Available Rooms</h3>
-                        {filterAvailableRooms().map((room, index) => (
-                            <AvailableRoom
-                                key={index}
-                                images={room.images} 
-                                name={room.name}
-                                price={room.price}
-                                description={room.description}
-                                roomCapacity={room.roomCapacity}
-                                checkInDate={checkInDate}
-                                checkOutDate={checkOutDate}
-                                adultGuests={parseInt(adultNumber)}
-                                childrenGuests={parseInt(childrenNumber)}
-                            />
-                        ))}
-                        </div>
-                    )}
+                {isValidationComplete && availableRooms.length === 0 ? (
+            <p className="mt-6 font-serif text-lg font-semibold text-center">
+                No rooms are available for the selected dates or the specified number of guests.
+            </p>
+        ) : (
+            availableRooms.length > 0 && (
+                <div className="flex flex-wrap justify-center mt-6">
+                    <h3 className="w-full mb-4 font-serif text-xl font-semibold text-center">Available Rooms</h3>
+                    {availableRooms.map((room, index) => (
+                        <AvailableRoom
+                            key={index}
+                            images={room.images}
+                            name={room.name}
+                            price={room.price}
+                            description={room.description}
+                            roomCapacity={room.roomCapacity}
+                            checkInDate={checkInDate}
+                            checkOutDate={checkOutDate}
+                            adultGuests={parseInt(adultNumber)}
+                            childrenGuests={parseInt(childrenNumber)}
+                        />
+                    ))}
+                </div>
+            )
+        )}
                 </div>
             );
         };
