@@ -191,7 +191,7 @@ const RoomAvailabilityBar = () => {
 
         // Filter rooms based on availability and capacity
         filteredRooms = filteredRooms.filter(
-            (room) => room.isAvailable && room.roomCapacity >= totalGuests
+            (room) => room.roomCapacity >= totalGuests
         );
 
         try {
@@ -199,18 +199,19 @@ const RoomAvailabilityBar = () => {
                 `/api/room/getavailable?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
             );
             const data = await response.json();
-
+    
             // Update room availability based on the fetched data
             filteredRooms = filteredRooms.map(room => {
-                const availability = data.find(item => item.name === room.name);
+                const availability = data.find(item => item.roomId === room.name);
                 return {
                     ...room,
                     isAvailable: availability ? availability.isAvailable : room.isAvailable
                 };
             });
-
-            // Filter only available rooms
+    
+            // Filter only available rooms (apply the filter after availability update)
             filteredRooms = filteredRooms.filter(room => room.isAvailable);
+    
             setAvailableRooms(filteredRooms);
         } catch (error) {
             console.error('Error fetching data:', error);
