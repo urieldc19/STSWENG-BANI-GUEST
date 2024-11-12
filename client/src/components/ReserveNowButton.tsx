@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { NativeSelect, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { NativeSelect, TextInput} from '@mantine/core';
-import axios from 'axios'
+import { useState } from 'react';
 
 
 interface ReserveNowProps {
@@ -65,7 +64,7 @@ const handleSubmit = async (values, totalGuests, setSubmissionStatus, checkInDat
         if (!response.ok) {
             throw new Error('Failed to create a confirmation email');
         }
-        setSubmissionStatus('Finished creating a reservation')
+        setSubmissionStatus('Reservation successful. Confirmation email has been sent!')
     }
 };
 
@@ -125,20 +124,24 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
         },
     });
     
-    const onSubmit = form.onSubmit((values) => {
+    const onSubmit = form.onSubmit(async (values) => {
         
-        setIsLoading(true)
+        setIsLoading(true);
         const totalGuests = values.adultGuests + values.childrenGuests;
-        
+
         if (totalGuests > values.roomCapacity) {
             setSubmissionStatus(`[Error] Total guests cannot exceed the room capacity of ${values.roomCapacity}.`);
-            return; 
-        } else {
-            handleSubmit(values, totalGuests, setSubmissionStatus, checkInDate, checkOutDate)
+            setIsLoading(false);
+            return;
         }
-        setIsLoading(false)
-        
-        setIsOpen(false)
+
+        try {
+            await handleSubmit(values, totalGuests, setSubmissionStatus, checkInDate, checkOutDate);
+        } catch (error) {
+            setSubmissionStatus('Failed to process the reservation. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
     });
 
 
@@ -241,7 +244,7 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
                         </form>
 
                         {/* Submission Status */}
-                        <p className={`mt-4 text-center ${submissionStatus.startsWith('[Error]') ? 'text-red-500' : 'text-[#F2EFE8]'}`}>
+                        <p className={`mt-4 text-center font-semibold ${submissionStatus.startsWith('[Error]') ? 'text-red-500' : 'text-[#F2EFE8]'}`}>
                         {submissionStatus}
                         </p>
                     </div>
@@ -252,6 +255,7 @@ const ReserveNowButton: React.FC<ReserveNowProps> = ({
 };
 
 export default ReserveNowButton;
+
 
 
 
