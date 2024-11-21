@@ -18,15 +18,15 @@ const getAvailableRooms = async (req, res) => {
 }
 
 const getRoomImages = async (req, res) => {
-    console.log("hello 0");
     try {
-        console.log("hello world");
-        return "return";
+        console.log("Received from api");
+        let reqRoomId = req.params.roomId;
 
-        let roomId = req.body;
-        // let images = await Room.find({roomId: }) 
+        // get from mongodb !
+        let data = await Room.findOne({roomId: reqRoomId})
+        let images = data["images"].split(",")
 
-        return images
+        res.json(images);
     } catch {
         res.status(500).json({message: "Failed to get image"})
     }

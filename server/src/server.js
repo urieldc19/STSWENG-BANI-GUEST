@@ -18,6 +18,6 @@ const room = require("./routes/room.js")
 app.use(cors())
 
 app.use("/api", reservation)
-app.use("/room", room)
+app.use("/api", room)
 
 module.exports = {app, PORT}

@@ -11,13 +11,12 @@ import './styles.css'
 
 const generateSlideshow = async function(roomId: any) {
   // get from server
-  let resp = await fetch(`/room/getRoomImages/${roomId}`, {
+  let resp = await fetch(`/api/getRoomImages/${roomId}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
-  })
-  console.log("Hello world")
-  console.log(resp)
-  return resp;
+  });
+  let images = await resp.json()
+  console.log(images)
 }
 
 export function SlideshowRoom( {roomId} : {roomId: string} ) {
