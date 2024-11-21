@@ -1,4 +1,5 @@
 import { Slideshow } from '../components/Slideshow';
+import { SlideshowRoom } from '../components/SlideshowRoom';
 import '../components/styles.css';
 import { Link } from 'react-router-dom';
 
@@ -15,6 +16,8 @@ const ScenicBalconySuite = () => {
   return (
     <div className="flex flex-col w-full min-h-screen" style={{ fontFamily: 'Inria Serif' }}>
       <img src={coverImage} alt="Scenic Balcony Suite Cover" className="w-full h-auto object-cover" />
+
+      <SlideshowRoom roomId="Room 7"></SlideshowRoom>
 
       <div className="bg-[#2F515B]/80 py-4 w-full">
         <div className="text-center text-white">

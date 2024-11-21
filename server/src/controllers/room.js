@@ -17,4 +17,19 @@ const getAvailableRooms = async (req, res) => {
     }
 }
 
-module.exports = {getAvailableRooms}
+const getRoomImages = async (req, res) => {
+    console.log("hello 0");
+    try {
+        console.log("hello world");
+        return "return";
+
+        let roomId = req.body;
+        // let images = await Room.find({roomId: }) 
+
+        return images
+    } catch {
+        res.status(500).json({message: "Failed to get image"})
+    }
+}
+
+module.exports = {getAvailableRooms, getRoomImages}
