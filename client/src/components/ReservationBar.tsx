@@ -1,11 +1,8 @@
-{/* install first: npm install react-datepicker and npm install --save @types/react-datepicker */}
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import AvailableRoom from "../components/AvailableRooms";
-import { NativeSelect } from '@mantine/core';
+import { NativeSelect } from "@mantine/core";
 
 const RoomAvailabilityBar = () => {
-    
     const [availableRooms, setAvailableRooms] = useState<{
         images: string[];
         name: string;
@@ -14,12 +11,16 @@ const RoomAvailabilityBar = () => {
         isAvailable: boolean;
         roomCapacity: number;
     }[]>([]);
-    
-    const [checkInDate, setCheckInDate] = useState('');
-    const [checkOutDate, setCheckOutDate] = useState('');
-    const [adultNumber, setAdultNumber] = useState('1');
-    const [childrenNumber, setChildrenNumber] = useState('0');
-    const [validationErrors, setValidationErrors] = useState<{ checkIn?: string; checkOut?: string }>({});
+
+    const [checkInDate, setCheckInDate] = useState("");
+    const [checkOutDate, setCheckOutDate] = useState("");
+    const [adultNumber, setAdultNumber] = useState("1");
+    const [childrenNumber, setChildrenNumber] = useState("0");
+    const [validationErrors, setValidationErrors] = useState<{
+        checkIn?: string;
+        checkOut?: string;
+    }>({});
+    const [isValidationComplete, setIsValidationComplete] = useState(false);
 
     const [imagesObj, setImagesObj] = useState({});
     const [error, setError] = useState(false);
@@ -30,40 +31,37 @@ const RoomAvailabilityBar = () => {
         today.setHours(0, 0, 0, 0);
         const errors: { checkIn?: string; checkOut?: string } = {};
 
-        
         const checkIn = new Date(checkInDate);
-        checkIn.setHours(0, 0, 0, 0); 
+        checkIn.setHours(0, 0, 0, 0);
         const checkOut = new Date(checkOutDate);
         checkOut.setHours(0, 0, 0, 0);
 
-        
         if (!checkInDate || checkIn < today) {
-            errors.checkIn = "Check-in date cannot be in the past or empty.";
+        errors.checkIn = "Check-in date cannot be in the past or empty.";
         }
 
-        
         if (!checkOutDate || checkOut <= checkIn) {
-            errors.checkOut = "Check-out date must be after the check-in date.";
+        errors.checkOut = "Check-out date must be after the check-in date.";
         }
 
-        
         if (Object.keys(errors).length > 0) {
-            setValidationErrors(errors);
-            return false;
+        setValidationErrors(errors);
+        return false;
         }
 
-        
         setValidationErrors({});
         return true;
     };
 
-    // Sample only (needs backend for isAvailable and actual images for the rooms)
-    const checkAvailability = () => {
+    const checkAvailability = async () => {
+        setIsValidationComplete(false);
+
         if (!validateDates()) {
-            return; // Stop if validation fails
+        return; // Stop if validation fails
         }
-        
-        const rooms = [
+
+        const totalGuests = parseInt(adultNumber) + parseInt(childrenNumber);
+        let filteredRooms = [
             {
                 images: imagesObj["Room 1"],
                 name: 'Room 1',
@@ -85,8 +83,8 @@ const RoomAvailabilityBar = () => {
                         <p>Create unforgettable memories in our spacious resort room, perfect for up to 8 guests. Your adventure starts here!</p>
                     </div>
                 ),
-                isAvailable: false,
-                roomCapacity: 48
+                isAvailable: true,
+                roomCapacity: 8,
             },
             {
                 images: imagesObj["Room 3"],
@@ -109,7 +107,7 @@ const RoomAvailabilityBar = () => {
                         <p>Find your paradise for two! Our elegantly designed room offers the perfect sanctuary for couples.</p>
                     </div>
                 ),
-                isAvailable: false,
+                isAvailable: true,
                 roomCapacity: 4,
             },
             {
@@ -133,7 +131,7 @@ const RoomAvailabilityBar = () => {
                         <p>Romantic retreats await! Our cozy room for two is the perfect getaway for couples looking to relax and reconnect.</p>
                     </div>
                 ),
-                isAvailable: false,
+                isAvailable: true,
                 roomCapacity: 4,
             },
             {
@@ -197,160 +195,162 @@ const RoomAvailabilityBar = () => {
                 roomCapacity: 5,
             }
         ];
-        setAvailableRooms(rooms);
+
+        filteredRooms = filteredRooms.filter((room) => room.roomCapacity >= totalGuests);
+
+        try {
+        const response = await fetch(
+            `${import.meta.env.VITE_SERVER_URL}/api/room/getavailable?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+        );
+        const data = await response.json();
+
+        filteredRooms = filteredRooms.map((room) => {
+            const availability = data.find((item) => item.roomId === room.name);
+            return {
+            ...room,
+            isAvailable: availability ? availability.isAvailable : room.isAvailable,
+            };
+        });
+
+        filteredRooms = filteredRooms.filter((room) => room.isAvailable);
+        setAvailableRooms(filteredRooms);
+        } catch (error) {
+        console.error("Error fetching data:", error);
+        } finally {
+        setIsValidationComplete(true);
+        }
     };
 
-    const filterAvailableRooms = () => {
-        return availableRooms.filter(room => room.isAvailable);
-    };
-
-    // For dynamic images
     useEffect(() => {
-        if (state == "loading") {
-          const fetchData = async function() {
-            let data: any = []
-            try { 
-                let resp = await fetch(`/api/room/getAllRoomImages`, {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                });
-                if (!resp.ok) { throw new Error("Cannot connect to server") }
-                data = await resp.json()
-        
-                // success
-                setState("loaded");
-                setImagesObj(data);
-                console.log(data)
-            } catch(e: any) {
-              setState("error");
-              setError(e);
-              console.log(`An error occured while loading images`)
-              console.log(e)
+        if (state === "loading") {
+        const fetchData = async () => {
+            try {
+            const resp = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/room/getAllRoomImages`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            });
+            if (!resp.ok) throw new Error("Cannot connect to server");
+            const data = await resp.json();
+            setState("loaded");
+            setImagesObj(data);
+            } catch (e) {
+            console.error("An error occurred while loading images:", e);
+            setState("error");
+            setError(true);
 
-              let newObj = {}
-              for (let x of ["Room 1", "Room 2", "Room 3", "Room 4", "Room 5", "Room 6", "Room 7", "Room 8", "Room 9", "Villa", "Hanging Kubo"]) {
-                newObj[x] = ["./images/hotel/hotel_slide3.png"];
-              }
-              setImagesObj(newObj);
-              console.log(newObj)
+            const fallbackImages = {};
+            [
+                "Room 1",
+                "Room 2",
+                "Room 3",
+                "Room 4",
+                "Room 5",
+                "Room 6",
+                "Room 7",
+                "Room 8",
+                "Room 9",
+                "Villa",
+                "Hanging Kubo",
+            ].forEach((room) => {
+                fallbackImages[room] = ["./images/hotel/hotel_slide3.png"];
+            });
+            setImagesObj(fallbackImages);
             }
-          }
-          fetchData();
-      }})
-
-    
-      const main = () => {
-        return (
-            <div className="w-[1350px] p-6 mx-auto mt-5 bg-[#A0B1B5] text-black opacity-100 rounded-sm shadow-lg"> 
-                <div className="flex flex-col justify-between gap-4 opacity-100 md:flex-row">
-                    
-                        {/* Check-In Field */}
-                        <div className="flex flex-col">
-                            <label className="mb-2 font-serif font-semibold text-left">Check-in</label>
-                            <input
-                                type="date"
-                                value={checkInDate}
-                                onChange={(event) => setCheckInDate(event.currentTarget.value)}
-                                className={`p-1 border w-[230px] border-gray-300 rounded-sm`}
-                            />
-                            <div style={{ width: '250px' }}>  
-                            <p className="text-red-500"> 
-                            {validationErrors.checkIn || ""} </p></div>
-                        </div>
-    
-                        {/* Check-Out Field */}
-                        <div className="flex flex-col">
-                            <label className="mb-2 font-serif font-semibold text-left">Check-out</label>
-                            <input
-                                type="date"
-                                value={checkOutDate}
-                                onChange={(event) => setCheckOutDate(event.currentTarget.value)}
-                                className={`p-1 border w-[230px] border-gray-300 rounded-sm`}
-                            />
-                            <div style={{ width: '250px' }}>  
-                            <p className="text-red-500"> 
-                            {validationErrors.checkOut || ""} </p></div>
-                        </div>
-    
-                        {/* Number of Guests Field */}
-                        <div className="flex flex-col">
-                            <label className="mb-2 font-serif font-semibold text-left">Number of Adults</label>
-                            <div className="flex gap-2">
-    
-                                <NativeSelect
-                                    className={`w-[230px] rounded-sm`}
-                                    value={adultNumber}
-                                    onChange={(event) => setAdultNumber(event.currentTarget.value)}
-                                    data={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
-                                />
-    
-                            </div>
-    
-                        </div>
-    
-                        <div className="flex flex-col">
-                            <label className="mb-2 font-serif font-semibold text-left">Number of Children</label>
-                            <div className="flex gap-2">
-    
-                                <NativeSelect
-                                    className="w-[230px] rounded-sm"
-                                    value={childrenNumber}
-                                    onChange={(event) => setChildrenNumber(event.currentTarget.value)}
-                                    data={['0','1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
-                                />
-    
-                            </div>
-                            
-                        </div>
-    
-                        {/* Check Availability Button */}
-                        <div className="flex items-end">
-                        <button
-                                onClick={checkAvailability}
-                                className="font-serif p-2 bg-[#A0B1B5] border border-black text-white font-semibold rounded-sm shadow-md hover:bg-[#2F515B]"
-                            >
-                                Check Availability
-                            </button>
-                        </div>
-                    </div>
-    
-                    {/* Available Rooms */}
-                    {filterAvailableRooms().length > 0 && (
-                        <div className="flex flex-wrap justify-center mt-6">
-                            <h3 className="w-full mb-4 font-serif text-xl font-semibold text-center">Available Rooms</h3>
-                            {filterAvailableRooms().map((room, index) => (
-                                <AvailableRoom
-                                    key={index}
-                                    images={room.images} 
-                                    name={room.name}
-                                    price={room.price}
-                                    description={room.description}
-                                    roomCapacity={room.roomCapacity}
-                                    checkInDate={checkInDate}
-                                    checkOutDate={checkOutDate}
-                                    adultGuests={parseInt(adultNumber)}
-                                    childrenGuests={parseInt(childrenNumber)}
-                                />
-                            ))}
-                            </div>
-                        )}
-                    </div>
-        )
-    }
+        };
+        fetchData();
+        }
+    }, [state]);
 
     return (
         <div>
-            { state == "loaded" && main() }
-            { state == "error" && main() }
-            { state == "loading" && (<div>Loading...</div>) }
+        {state === "loading" && <div>Loading...</div>}
+        {(state === "loaded" || state === "error") && (
+            <div className="w-[1350px] p-6 mx-auto mt-5 bg-[#A0B1B5] text-black opacity-100 rounded-sm shadow-lg">
+            <div className="flex flex-col justify-between gap-4 opacity-100 md:flex-row">
+                {/* Input Fields */}
+                <div className="flex flex-col">
+                <label className="mb-2 font-serif font-semibold text-left">Check-in</label>
+                <input
+                    type="date"
+                    value={checkInDate}
+                    onChange={(e) => setCheckInDate(e.currentTarget.value)}
+                    className="p-1 border w-[230px] border-gray-300 rounded-sm"
+                />
+                <p className="text-red-500">{validationErrors.checkIn || ""}</p>
+                </div>
+                <div className="flex flex-col">
+                <label className="mb-2 font-serif font-semibold text-left">Check-out</label>
+                <input
+                    type="date"
+                    value={checkOutDate}
+                    onChange={(e) => setCheckOutDate(e.currentTarget.value)}
+                    className="p-1 border w-[230px] border-gray-300 rounded-sm"
+                />
+                <p className="text-red-500">{validationErrors.checkOut || ""}</p>
+                </div>
+                <div className="flex flex-col">
+                <label className="mb-2 font-serif font-semibold text-left">Number of Adults</label>
+                <NativeSelect
+                    className="w-[230px] rounded-sm"
+                    value={adultNumber}
+                    onChange={(e) => setAdultNumber(e.currentTarget.value)}
+                    data={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]}
+                />
+                </div>
+                <div className="flex flex-col">
+                <label className="mb-2 font-serif font-semibold text-left">Number of Children</label>
+                <NativeSelect
+                    className="w-[230px] rounded-sm"
+                    value={childrenNumber}
+                    onChange={(e) => setChildrenNumber(e.currentTarget.value)}
+                    data={["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]}
+                />
+                </div>
+                {/* Check Availability Button */}
+                <div className="flex items-end">
+                <button
+                    onClick={checkAvailability}
+                    className="font-serif p-2 bg-[#A0B1B5] border border-black text-white font-semibold rounded-sm shadow-md hover:bg-[#2F515B]"
+                >
+                    Check Availability
+                </button>
+                </div>
+            </div>
+
+            {/* Available Rooms */}
+            {isValidationComplete && (
+                <div className="mt-6">
+                {availableRooms.length === 0 ? (
+                    <p className="font-serif text-lg font-semibold text-center">
+                    No rooms are available for the selected dates or the specified number of guests.
+                    </p>
+                ) : (
+                    <div className="flex flex-wrap justify-center">
+                    <h3 className="w-full mb-4 font-serif text-xl font-semibold text-center">
+                        Available Rooms
+                    </h3>
+                    {availableRooms.map((room, index) => (
+                        <AvailableRoom
+                        key={index}
+                        images={room.images}
+                        name={room.name}
+                        price={room.price}
+                        description={room.description}
+                        roomCapacity={room.roomCapacity}
+                        checkInDate={checkInDate}
+                        checkOutDate={checkOutDate}
+                        adultGuests={parseInt(adultNumber)}
+                        childrenGuests={parseInt(childrenNumber)}
+                        />
+                    ))}
+                    </div>
+                )}
+                </div>
+            )}
+            </div>
+        )}
         </div>
-    )
-}
+    );
+};
 
 export default RoomAvailabilityBar;
-
-
-
-
-
-
