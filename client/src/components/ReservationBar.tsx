@@ -1,6 +1,6 @@
-import { NativeSelect } from '@mantine/core';
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 import AvailableRoom from "../components/AvailableRooms";
+import { NativeSelect } from "@mantine/core";
 
 const RoomAvailabilityBar = () => {
     const [availableRooms, setAvailableRooms] = useState<{
@@ -12,12 +12,19 @@ const RoomAvailabilityBar = () => {
         roomCapacity: number;
     }[]>([]);
 
-    const [checkInDate, setCheckInDate] = useState('');
-    const [checkOutDate, setCheckOutDate] = useState('');
-    const [adultNumber, setAdultNumber] = useState('1');
-    const [childrenNumber, setChildrenNumber] = useState('0');
-    const [validationErrors, setValidationErrors] = useState<{ checkIn?: string; checkOut?: string }>({});
+    const [checkInDate, setCheckInDate] = useState("");
+    const [checkOutDate, setCheckOutDate] = useState("");
+    const [adultNumber, setAdultNumber] = useState("1");
+    const [childrenNumber, setChildrenNumber] = useState("0");
+    const [validationErrors, setValidationErrors] = useState<{
+        checkIn?: string;
+        checkOut?: string;
+    }>({});
     const [isValidationComplete, setIsValidationComplete] = useState(false);
+
+    const [imagesObj, setImagesObj] = useState({});
+    const [error, setError] = useState(false);
+    const [state, setState] = useState("loading");
 
     const validateDates = () => {
         const today = new Date();
@@ -30,16 +37,16 @@ const RoomAvailabilityBar = () => {
         checkOut.setHours(0, 0, 0, 0);
 
         if (!checkInDate || checkIn < today) {
-            errors.checkIn = "Check-in date cannot be in the past or empty.";
+        errors.checkIn = "Check-in date cannot be in the past or empty.";
         }
 
         if (!checkOutDate || checkOut <= checkIn) {
-            errors.checkOut = "Check-out date must be after the check-in date.";
+        errors.checkOut = "Check-out date must be after the check-in date.";
         }
 
         if (Object.keys(errors).length > 0) {
-            setValidationErrors(errors);
-            return false;
+        setValidationErrors(errors);
+        return false;
         }
 
         setValidationErrors({});
@@ -50,13 +57,13 @@ const RoomAvailabilityBar = () => {
         setIsValidationComplete(false);
 
         if (!validateDates()) {
-            return; // Stop if validation fails
+        return; // Stop if validation fails
         }
 
         const totalGuests = parseInt(adultNumber) + parseInt(childrenNumber);
         let filteredRooms = [
             {
-                images: ['./images/reservations/room123.png', './images/reservations/room123(2).png' ],
+                images: imagesObj["Room 1"],
                 name: 'Room 1',
                 price: '₱9,600/night',
                 description: (
@@ -68,7 +75,7 @@ const RoomAvailabilityBar = () => {
                 roomCapacity: 8,
             },
             {
-                images: ['./images/reservations/room123.png', './images/reservations/room123(2).png'],
+                images: imagesObj["Room 2"],
                 name: 'Room 2',
                 price: '₱9,600/night',
                 description: (
@@ -80,7 +87,7 @@ const RoomAvailabilityBar = () => {
                 roomCapacity: 8,
             },
             {
-                images: ['./images/reservations/room123.png', './images/reservations/room123(2).png'],
+                images: imagesObj["Room 3"],
                 name: 'Room 3',
                 price: '₱9,600/night',
                 description: (
@@ -92,7 +99,7 @@ const RoomAvailabilityBar = () => {
                 roomCapacity: 8,
             },
             {
-                images: ['./images/reservations/room456.png', './images/reservations/room456(2).png'],
+                images: imagesObj["Room 4"],
                 name: 'Room 4',
                 price: '₱4,200/night',
                 description: (
@@ -104,7 +111,7 @@ const RoomAvailabilityBar = () => {
                 roomCapacity: 4,
             },
             {
-                images: ['./images/reservations/room456.png', './images/reservations/room456(2).png'],
+                images: imagesObj["Room 5"],
                 name: 'Room 5',
                 price: '₱4,200/night',
                 description: (
@@ -116,7 +123,7 @@ const RoomAvailabilityBar = () => {
                 roomCapacity: 4,
             },
             {
-                images: ['./images/reservations/room456.png', './images/reservations/room456(2).png'],
+                images: imagesObj["Room 6"],
                 name: 'Room 6',
                 price: '₱4,200/night',
                 description: (
@@ -128,7 +135,7 @@ const RoomAvailabilityBar = () => {
                 roomCapacity: 4,
             },
             {
-                images: ['./images/reservations/room7.png', './images/reservations/room7(2).png'],
+                images: imagesObj["Room 7"],
                 name: 'Room 7',
                 price: '₱10,000/night',
                 description: (
@@ -140,7 +147,7 @@ const RoomAvailabilityBar = () => {
                 roomCapacity: 9,
             },
             {
-                images: ['./images/reservations/room8.png', './images/reservations/room8(2).png'],
+                images: imagesObj["Room 8"],
                 name: 'Room 8',
                 price: '₱11,000/night',
                 description: (
@@ -152,7 +159,7 @@ const RoomAvailabilityBar = () => {
                 roomCapacity: 8,
             },
             {
-                images: ['./images/reservations/room9.png', './images/reservations/room9(2).png', './images/reservations/room9(3).png'],
+                images: imagesObj["Room 9"],
                 name: 'Room 9',
                 price: '₱13,500/night',
                 description: (
@@ -164,7 +171,7 @@ const RoomAvailabilityBar = () => {
                 roomCapacity: 10,
             },
             {
-                images: ['./images/reservations/villa.png', './images/reservations/villa(2).png', './images/reservations/villa(3).png'],
+                images: imagesObj["Villa"],
                 name: 'Villa',
                 price: '₱15,000/night',
                 description: (
@@ -176,7 +183,7 @@ const RoomAvailabilityBar = () => {
                 roomCapacity: 8,
             },
             {
-                images: ['./images/reservations/kubo.png', './images/reservations/kubo(2).png'],
+                images: imagesObj["Hanging Kubo"],
                 name: 'Hanging Kubo',
                 price: '₱5,000/night',
                 description: (
@@ -189,144 +196,161 @@ const RoomAvailabilityBar = () => {
             }
         ];
 
-        // Filter rooms based on availability and capacity
-        filteredRooms = filteredRooms.filter(
-            (room) => room.roomCapacity >= totalGuests
-        );
+        filteredRooms = filteredRooms.filter((room) => room.roomCapacity >= totalGuests);
 
         try {
-            const response = await fetch(
-                `${import.meta.env.VITE_SERVER_URL}/api/room/getavailable?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
-            );
-            const data = await response.json();
-    
-            // Update room availability based on the fetched data
-            filteredRooms = filteredRooms.map(room => {
-                const availability = data.find(item => item.roomId === room.name);
-                return {
-                    ...room,
-                    isAvailable: availability ? availability.isAvailable : room.isAvailable
-                };
-            });
-    
-            // Filter only available rooms (apply the filter after availability update)
-            filteredRooms = filteredRooms.filter(room => room.isAvailable);
-    
-            setAvailableRooms(filteredRooms);
+        const response = await fetch(
+            `${import.meta.env.VITE_SERVER_URL}/api/room/getavailable?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+        );
+        const data = await response.json();
+
+        filteredRooms = filteredRooms.map((room) => {
+            const availability = data.find((item) => item.roomId === room.name);
+            return {
+            ...room,
+            isAvailable: availability ? availability.isAvailable : room.isAvailable,
+            };
+        });
+
+        filteredRooms = filteredRooms.filter((room) => room.isAvailable);
+        setAvailableRooms(filteredRooms);
         } catch (error) {
-            console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
         } finally {
-            setIsValidationComplete(true); // Update validation status after check
+        setIsValidationComplete(true);
         }
     };
 
+    useEffect(() => {
+        if (state === "loading") {
+        const fetchData = async () => {
+            try {
+            const resp = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/room/getAllRoomImages`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            });
+            if (!resp.ok) throw new Error("Cannot connect to server");
+            const data = await resp.json();
+            setState("loaded");
+            setImagesObj(data);
+            } catch (e) {
+            console.error("An error occurred while loading images:", e);
+            setState("error");
+            setError(true);
+
+            const fallbackImages = {};
+            [
+                "Room 1",
+                "Room 2",
+                "Room 3",
+                "Room 4",
+                "Room 5",
+                "Room 6",
+                "Room 7",
+                "Room 8",
+                "Room 9",
+                "Villa",
+                "Hanging Kubo",
+            ].forEach((room) => {
+                fallbackImages[room] = ["./images/hotel/hotel_slide3.png"];
+            });
+            setImagesObj(fallbackImages);
+            }
+        };
+        fetchData();
+        }
+    }, [state]);
+
     return (
-        <div className="w-[1350px] p-6 mx-auto mt-5 bg-[#A0B1B5] text-black opacity-100 rounded-sm shadow-lg">
+        <div>
+        {state === "loading" && <div>Loading...</div>}
+        {(state === "loaded" || state === "error") && (
+            <div className="w-[1350px] p-6 mx-auto mt-5 bg-[#A0B1B5] text-black opacity-100 rounded-sm shadow-lg">
             <div className="flex flex-col justify-between gap-4 opacity-100 md:flex-row">
-                {/* Check-In Field */}
+                {/* Input Fields */}
                 <div className="flex flex-col">
-                    <label className="mb-2 font-serif font-semibold text-left">Check-in</label>
-                    <input
-                        type="date"
-                        value={checkInDate}
-                        onChange={(event) => setCheckInDate(event.currentTarget.value)}
-                        className={`p-1 border w-[230px] border-gray-300 rounded-sm`}
-                    />
-                    <div style={{ width: '250px' }}>
-                        <p className="text-red-500">
-                            {validationErrors.checkIn || ""}
-                        </p>
-                    </div>
+                <label className="mb-2 font-serif font-semibold text-left">Check-in</label>
+                <input
+                    type="date"
+                    value={checkInDate}
+                    onChange={(e) => setCheckInDate(e.currentTarget.value)}
+                    className="p-1 border w-[230px] border-gray-300 rounded-sm"
+                />
+                <p className="text-red-500">{validationErrors.checkIn || ""}</p>
                 </div>
-
-                {/* Check-Out Field */}
                 <div className="flex flex-col">
-                    <label className="mb-2 font-serif font-semibold text-left">Check-out</label>
-                    <input
-                        type="date"
-                        value={checkOutDate}
-                        onChange={(event) => setCheckOutDate(event.currentTarget.value)}
-                        className={`p-1 border w-[230px] border-gray-300 rounded-sm`}
-                    />
-                    <div style={{ width: '250px' }}>
-                        <p className="text-red-500">
-                            {validationErrors.checkOut || ""}
-                        </p>
-                    </div>
+                <label className="mb-2 font-serif font-semibold text-left">Check-out</label>
+                <input
+                    type="date"
+                    value={checkOutDate}
+                    onChange={(e) => setCheckOutDate(e.currentTarget.value)}
+                    className="p-1 border w-[230px] border-gray-300 rounded-sm"
+                />
+                <p className="text-red-500">{validationErrors.checkOut || ""}</p>
                 </div>
-
-                {/* Number of Guests Field */}
                 <div className="flex flex-col">
-                    <label className="mb-2 font-serif font-semibold text-left">Number of Adults</label>
-                    <div className="flex gap-2">
-                        <NativeSelect
-                            className={`w-[230px] rounded-sm`}
-                            value={adultNumber}
-                            onChange={(event) => setAdultNumber(event.currentTarget.value)}
-                            data={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
-                        />
-                    </div>
+                <label className="mb-2 font-serif font-semibold text-left">Number of Adults</label>
+                <NativeSelect
+                    className="w-[230px] rounded-sm"
+                    value={adultNumber}
+                    onChange={(e) => setAdultNumber(e.currentTarget.value)}
+                    data={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]}
+                />
                 </div>
-
                 <div className="flex flex-col">
-                    <label className="mb-2 font-serif font-semibold text-left">Number of Children</label>
-                    <div className="flex gap-2">
-                        <NativeSelect
-                            className="w-[230px] rounded-sm"
-                            value={childrenNumber}
-                            onChange={(event) => setChildrenNumber(event.currentTarget.value)}
-                            data={['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
-                        />
-                    </div>
+                <label className="mb-2 font-serif font-semibold text-left">Number of Children</label>
+                <NativeSelect
+                    className="w-[230px] rounded-sm"
+                    value={childrenNumber}
+                    onChange={(e) => setChildrenNumber(e.currentTarget.value)}
+                    data={["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]}
+                />
                 </div>
-
                 {/* Check Availability Button */}
                 <div className="flex items-end">
-                    <button
-                        onClick={checkAvailability}
-                        className="font-serif p-2 bg-[#A0B1B5] border border-black text-white font-semibold rounded-sm shadow-md hover:bg-[#2F515B]"
-                    >
-                        Check Availability
-                    </button>
+                <button
+                    onClick={checkAvailability}
+                    className="font-serif p-2 bg-[#A0B1B5] border border-black text-white font-semibold rounded-sm shadow-md hover:bg-[#2F515B]"
+                >
+                    Check Availability
+                </button>
                 </div>
             </div>
 
-            {/* Validation Result */}
-            {isValidationComplete ? (
-                availableRooms.length === 0 ? (
-                    <p className="mt-6 font-serif text-lg font-semibold text-center">
-                        No rooms are available for the selected dates or the specified number of guests.
+            {/* Available Rooms */}
+            {isValidationComplete && (
+                <div className="mt-6">
+                {availableRooms.length === 0 ? (
+                    <p className="font-serif text-lg font-semibold text-center">
+                    No rooms are available for the selected dates or the specified number of guests.
                     </p>
                 ) : (
-                    <div className="flex flex-wrap justify-center mt-6">
-                        <h3 className="w-full mb-4 font-serif text-xl font-semibold text-center">Available Rooms</h3>
-                        {availableRooms.map((room, index) => (
-                            <AvailableRoom
-                                key={index}
-                                images={room.images}
-                                name={room.name}
-                                price={room.price}
-                                description={room.description}
-                                roomCapacity={room.roomCapacity}
-                                checkInDate={checkInDate}
-                                checkOutDate={checkOutDate}
-                                adultGuests={parseInt(adultNumber)}
-                                childrenGuests={parseInt(childrenNumber)}
-                            />
-                        ))}
+                    <div className="flex flex-wrap justify-center">
+                    <h3 className="w-full mb-4 font-serif text-xl font-semibold text-center">
+                        Available Rooms
+                    </h3>
+                    {availableRooms.map((room, index) => (
+                        <AvailableRoom
+                        key={index}
+                        images={room.images}
+                        name={room.name}
+                        price={room.price}
+                        description={room.description}
+                        roomCapacity={room.roomCapacity}
+                        checkInDate={checkInDate}
+                        checkOutDate={checkOutDate}
+                        adultGuests={parseInt(adultNumber)}
+                        childrenGuests={parseInt(childrenNumber)}
+                        />
+                    ))}
                     </div>
-                )
-            ) : (
-                <p className="mt-6 font-serif text-lg font-semibold text-center">Loading...</p>
+                )}
+                </div>
             )}
+            </div>
+        )}
         </div>
     );
 };
 
 export default RoomAvailabilityBar;
-
-
-
-
-
-

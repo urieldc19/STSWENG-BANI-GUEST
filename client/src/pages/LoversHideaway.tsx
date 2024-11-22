@@ -1,4 +1,4 @@
-import { Slideshow } from '../components/Slideshow';
+import { SlideshowRoom } from '../components/SlideshowRoom';
 import '../components/styles.css';
 import { Link } from 'react-router-dom';
 
@@ -35,11 +35,7 @@ const LoversHideaway = () => {
         </div>
       </section>
 
-      <div className="flex justify-center mb-6">
-        <div className="w-full max-w-[1441px] h-[640px]">
-          <Slideshow images={slideshowImages} />
-        </div>
-      </div>
+      <SlideshowRoom roomId="Room 4"></SlideshowRoom>
 
       <div className="text-center mb-4">
         <p className="text-2xl md:text-3xl" style={{ fontSize: '25px' }}>Rooms 4, 5, & 6: Lover’s Hideaway</p>

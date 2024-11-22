@@ -1,14 +1,14 @@
-import { Slideshow } from '../components/Slideshow';
+import { SlideshowRoom } from '../components/SlideshowRoom';
 import '../components/styles.css';
 import { Link } from 'react-router-dom';
 
 const coverImage = './images/room-cover/Serenity.png';
 
 const slideshowImages = [
-  './images/serenity-villa/serenity-1.png',
-  './images/serenity-villa/serenity-2.png',
-  './images/serenity-villa/serenity-3.png',
-  './images/serenity-villa/serenity-4.png',
+  './images/serenity/serenity-1.png',
+  './images/serenity/serenity-2.png',
+  './images/serenity/serenity-3.png',
+  './images/serenity/serenity-4.png',
 ];
 
 const SerenityVilla = () => {
@@ -34,11 +34,7 @@ const SerenityVilla = () => {
         </div>
       </section>
 
-      <div className="flex justify-center mb-6">
-        <div className="w-full max-w-[1441px] h-[640px]">
-          <Slideshow images={slideshowImages} />
-        </div>
-      </div>
+      <SlideshowRoom roomId="Villa"></SlideshowRoom>
 
       <div className="text-center mb-4">
         <p className="text-2xl md:text-3xl" style={{ fontSize: '25px' }}>Serenity Villa</p>

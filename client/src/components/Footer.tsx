@@ -21,15 +21,16 @@ export function Footer() {
 
       <div className="bg-tealblue text-white py-8 px-4 lg:px-12 lg:flex lg:justify-around lg:items-start lg:gap-8 text-center lg:text-left">
 
-        <div className="lg:flex lg:flex-col lg:items-start mt-8 lg:mt-0">
-        <br />
-          <Image src='./images/navbar-logo.png' alt="Logo" className="footer-logo mb-4 mx-auto lg:mx-0" />
-          <p className="text-sm md:text-lg">
-            Dacap Sur, Bani,<br />
-            Philippines, 2407
-          </p>
-          <p className="text-sm md:text-lg"><br />contact@banihiddenparadise.com</p>
-        </div>
+      <div>
+  <Link to="/"> 
+    <Image src='./images/navbar-logo.png' alt="Logo" className="footer-logo mb-4 mx-auto lg:mx-0" />
+  </Link>
+  <p className="text-sm md:text-lg">
+    Dacap Sur, Bani,<br />
+    Philippines, 2407
+  </p>
+  <p className="text-sm md:text-lg"><br />contact@banihiddenparadise.com</p>
+</div>
 
         <div className="lg:flex lg:flex-col lg:items-start mt-8 lg:mt-0">
           <p className="text-sm md:text-lg mb-4">
