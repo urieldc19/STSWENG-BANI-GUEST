@@ -196,7 +196,7 @@ const RoomAvailabilityBar = () => {
 
         try {
             const response = await fetch(
-                `/api/room/getavailable?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+                `${import.meta.env.VITE_SERVER_URL}/api/room/getavailable?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
             );
             const data = await response.json();
     
