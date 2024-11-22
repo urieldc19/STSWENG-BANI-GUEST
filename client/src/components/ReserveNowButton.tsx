@@ -30,7 +30,7 @@ const handleSubmit = async (values, totalGuests, setSubmissionStatus, checkInDat
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
     }    
-    const response = await fetch('/api/createReservation', {
+    const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/createReservation`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
