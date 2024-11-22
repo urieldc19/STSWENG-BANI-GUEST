@@ -42,4 +42,25 @@ const getRoomImages = async (req, res) => {
     }
 }
 
-module.exports = {getAvailableRooms, getRoomImages}
+const getAllRoomImages = async (req, res) => {
+    try {
+        // get from mongodb !
+        let images = await Room.find({}).select(["roomId", "images"])
+        let imageJson = {};
+        for (i of images) {
+            if (i.images != undefined || i.images == "") {
+                imageJson[i.roomId] = i.images.split(",");
+            } else {
+                imageJson[i.roomId] = ["./images/hotel/hotel_slide3.png"];
+            }
+        }
+
+        res.json(imageJson);
+    } catch(e) {
+        res.status(500).json({message: "Failed to get image"})
+        console.log(`Failed to get image`)
+        console.log(e)
+    }
+}
+
+module.exports = {getAvailableRooms, getRoomImages, getAllRoomImages}

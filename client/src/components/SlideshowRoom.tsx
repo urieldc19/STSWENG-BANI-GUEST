@@ -57,16 +57,16 @@ export const SlideshowRoom = (roomId: any, cn="") => {
           });
           if (!resp.ok) { throw new Error("Cannot connect to server") }
           data = await resp.json()
+
+          // success
+          setState("loaded");
+          setImages(data);
         } catch(e: any) {
           setState("error");
           setError(e);
           console.log(`An error occured while loading slideshow with id ${roomId}`)
           console.log(e)
         }
-
-        // success
-        setState("loaded");
-        setImages(data);
       }
       fetchData();
   }})
