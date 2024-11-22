@@ -17,8 +17,6 @@ const ScenicBalconySuite = () => {
     <div className="flex flex-col w-full min-h-screen" style={{ fontFamily: 'Inria Serif' }}>
       <img src={coverImage} alt="Scenic Balcony Suite Cover" className="w-full h-auto object-cover" />
 
-      <SlideshowRoom roomId="Room 1"></SlideshowRoom>
-
       <div className="bg-[#2F515B]/80 py-4 w-full">
         <div className="text-center text-white">
           <img src="/images/logo.png" alt="Logo of Bani Resort" className="mx-auto mb-2 w-24 h-24" />
@@ -38,11 +36,7 @@ const ScenicBalconySuite = () => {
         </div>
       </section>
 
-      <div className="flex justify-center mb-6">
-        <div className="w-full max-w-[1441px] h-[640px]">
-          <Slideshow images={slideshowImages} />
-        </div>
-      </div>
+      <SlideshowRoom roomId="Room 7"></SlideshowRoom>
 
       <div className="text-center mb-4">
         <p className="text-2xl md:text-3xl" style={{ fontSize: '25px' }}>Room 7: Scenic Balcony Suite</p>
