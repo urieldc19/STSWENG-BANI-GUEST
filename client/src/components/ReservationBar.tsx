@@ -210,7 +210,7 @@ const RoomAvailabilityBar = () => {
           const fetchData = async function() {
             let data: any = []
             try { 
-                let resp = await fetch(`/api/getAllRoomImages`, {
+                let resp = await fetch(`/api/room/getAllRoomImages`, {
                     method: "GET",
                     headers: { "Content-Type": "application/json" },
                 });

@@ -6,7 +6,6 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Image } from '@mantine/core';
-import { Slideshow } from "./Slideshow.tsx"
 import './styles.css'
 
 function createSlideshow(images: any, cn = "") {
@@ -51,7 +50,7 @@ export const SlideshowRoom = (roomId: any, cn="") => {
       const fetchData = async function() {
         let data: any = []
         try { 
-          let resp = await fetch(`/api/getRoomImages/${roomId}`, {
+          let resp = await fetch(`/api/room/getRoomImages/${roomId}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
           });
@@ -82,57 +81,3 @@ export const SlideshowRoom = (roomId: any, cn="") => {
   )
 }
 export default SlideshowRoom;
-  /*
-  // get from server
-  let resp = await fetch(`/api/getRoomImages/${roomId}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  }).catch((e) => {
-    setState("error");
-    setError(e);
-    return "";
-  });
-  
-  let images = await resp.json()
-  console.log("hi")
-
-  setState("loaded");
-  setImages(images);
-}
-
-export function SlideshowRoom( {roomId} : {roomId: string} ) {
-  let images: String[] = [];
-  useEffect(() => {
-    setState("loading");
-    generateSlideshow(roomId);
-  })
-
-  // todo images
-  // {images} : {images: string[]},
-
-  const slides = images.map((url) => (
-    <SwiperSlide>
-      <Image src={url} />
-    </SwiperSlide>
-  ));
-}
-      /*
-      <div>
-        <Swiper
-          spaceBetween={30}
-          centeredSlides={true}
-          loop={true}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Autoplay, Pagination]}
-          className="mySwiper"
-        >
-          {slides}
-        </Swiper>
-      </div>
-      */
