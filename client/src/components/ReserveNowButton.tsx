@@ -41,7 +41,7 @@ const handleSubmit = async (values, totalGuests, setSubmissionStatus, checkInDat
     if (!response.ok) {
         setSubmissionStatus('Failed to create a reservation')
     } else {
-        const response = await fetch('/api/sendConfirmationEmail', {
+        const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/sendConfirmationEmail`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
