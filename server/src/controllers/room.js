@@ -99,7 +99,7 @@ const getRoomImages = async (req, res) => {
             console.log(`Retrieved images for id ${reqRoomId}`)
         }
         */
-        if (data["images"] != undefined && data["images"] != "") {
+        if (data != null && data["images"] != undefined && data["images"] != "") {
             console.log(data)
             images = data[images].split(",");
             console.log(`Retrieved images for id ${reqRoomId}`)
