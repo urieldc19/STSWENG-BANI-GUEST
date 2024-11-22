@@ -1,4 +1,3 @@
-import { Slideshow } from '../components/Slideshow';
 import { SlideshowRoom } from '../components/SlideshowRoom';
 import '../components/styles.css';
 import { Link } from 'react-router-dom';
