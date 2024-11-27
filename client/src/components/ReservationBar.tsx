@@ -199,25 +199,25 @@ const RoomAvailabilityBar = () => {
         filteredRooms = filteredRooms.filter((room) => room.roomCapacity >= totalGuests);
 
         try {
-        const response = await fetch(
-            `${import.meta.env.VITE_SERVER_URL}/api/room/getavailable?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
-        );
-        const data = await response.json();
+            const response = await fetch(
+                `${import.meta.env.VITE_SERVER_URL}/api/room/getavailable?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+            );
+            const data = await response.json();
 
-        filteredRooms = filteredRooms.map((room) => {
-            const availability = data.find((item) => item.roomId === room.name);
-            return {
-            ...room,
-            isAvailable: availability ? availability.isAvailable : room.isAvailable,
-            };
-        });
+            filteredRooms = filteredRooms.map((room) => {
+                const availability = data.find((item) => item.roomId === room.name);
+                return {
+                ...room,
+                isAvailable: availability ? availability.isAvailable : room.isAvailable,
+                };
+            });
 
-        filteredRooms = filteredRooms.filter((room) => room.isAvailable);
-        setAvailableRooms(filteredRooms);
+            filteredRooms = filteredRooms.filter((room) => room.isAvailable);
+            setAvailableRooms(filteredRooms);
         } catch (error) {
-        console.error("Error fetching data:", error);
+            console.error("Error fetching data:", error);
         } finally {
-        setIsValidationComplete(true);
+            setIsValidationComplete(true);
         }
     };
 
@@ -225,36 +225,36 @@ const RoomAvailabilityBar = () => {
         if (state === "loading") {
         const fetchData = async () => {
             try {
-            const resp = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/room/getAllRoomImages`, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            });
-            if (!resp.ok) throw new Error("Cannot connect to server");
-            const data = await resp.json();
-            setState("loaded");
-            setImagesObj(data);
+                const resp = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/room/getAllRoomImages`, {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                });
+                if (!resp.ok) throw new Error("Cannot connect to server");
+                const data = await resp.json();
+                setState("loaded");
+                setImagesObj(data);
             } catch (e) {
-            console.error("An error occurred while loading images:", e);
-            setState("error");
-            setError(true);
+                console.error("An error occurred while loading images:", e);
+                setState("error");
+                setError(true);
 
-            const fallbackImages = {};
-            [
-                "Room 1",
-                "Room 2",
-                "Room 3",
-                "Room 4",
-                "Room 5",
-                "Room 6",
-                "Room 7",
-                "Room 8",
-                "Room 9",
-                "Villa",
-                "Hanging Kubo",
-            ].forEach((room) => {
-                fallbackImages[room] = ["./images/hotel/hotel_slide3.png"];
-            });
-            setImagesObj(fallbackImages);
+                const fallbackImages = {};
+                [
+                    "Room 1",
+                    "Room 2",
+                    "Room 3",
+                    "Room 4",
+                    "Room 5",
+                    "Room 6",
+                    "Room 7",
+                    "Room 8",
+                    "Room 9",
+                    "Villa",
+                    "Hanging Kubo",
+                ].forEach((room) => {
+                    fallbackImages[room] = ["./images/placeholder1.png", "./images/placeholder2.jpg", "./images/placeholder3.jpg"];
+                });
+                setImagesObj(fallbackImages);
             }
         };
         fetchData();

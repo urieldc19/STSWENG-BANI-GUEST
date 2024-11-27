@@ -49,8 +49,8 @@ export const SlideshowRoom = (roomId: any, cn="") => {
     if (state == "loading") {
       const fetchData = async function() {
         let data: any = []
-        try { 
-          let resp = await fetch(`/api/room/getRoomImages/${roomId}`, {
+        try {
+          let resp = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/room/getRoomImages/${roomId}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
           });
