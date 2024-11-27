@@ -65,6 +65,7 @@ const handleSubmit = async (values, totalGuests, setSubmissionStatus, checkInDat
             throw new Error('Failed to create a confirmation email');
         }
         setSubmissionStatus('Reservation successful. Confirmation email has been sent!')
+        window.location.reload()
     }
 };
 
