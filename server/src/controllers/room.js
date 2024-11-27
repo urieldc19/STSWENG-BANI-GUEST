@@ -13,8 +13,8 @@ const ROOM_PLACEHOLDER_IMAGES = {
     "Room 5": ["./images/lovers-hideaway/lovers-1.png", "./images/lovers-hideaway/lovers-2.png", "./images/lovers-hideaway/lovers-3.png", "./images/lovers-hideaway/lovers-4.png"],
     "Room 6": ["./images/lovers-hideaway/lovers-1.png", "./images/lovers-hideaway/lovers-2.png", "./images/lovers-hideaway/lovers-3.png", "./images/lovers-hideaway/lovers-4.png"],
     "Room 7": ["./images/scenic-balcony/scenic-1.png", "./images/scenic-balcony/scenic-2.png", "./images/scenic-balcony/scenic-3.png"],
-    "Room 7": ["./images/veranda-vista/veranda-1.png", "./images/veranda-vista/veranda-2.png", "./images/veranda-vista/veranda-3.png", "./images/veranda-vista/veranda-4.png"],
-    "Room 8": ["./images/luxe-suite/luxe-1.png", "./images/luxe-suite/luxe-2.png", "./images/luxe-suite/luxe-3.png", "./images/luxe-suite/luxe-4.png"],
+    "Room 8": ["./images/veranda-vista/veranda-1.png", "./images/veranda-vista/veranda-2.png", "./images/veranda-vista/veranda-3.png", "./images/veranda-vista/veranda-4.png"],
+    "Room 9": ["./images/luxe-suite/luxe-1.png", "./images/luxe-suite/luxe-2.png", "./images/luxe-suite/luxe-3.png", "./images/luxe-suite/luxe-4.png"],
     "Villa": ["./images/serenity/serenity-1.png", "./images/serenity/serenity-2.png", "./images/serenity/serenity-3.png", "./images/serenity/serenity-4.png"],
     "Hanging Kubo": ["./images/treetop-haven/treetop-1.png", "./images/treetop-haven/treetop-2.png", "./images/treetop-haven/treetop-3.png", "./images/treetop-haven/treetop-4.png"],
 }
